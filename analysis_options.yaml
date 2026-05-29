@@ -1,0 +1,44 @@
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "lib/config/themes/generated/*.dart"
+  errors:
+    public_member_api_docs: ignore 
+    lines_longer_than_80_chars: ignore 
+    inference_failure_on_instance_creation: ignore
+    inference_failure_on_function_return_type: ignore
+    avoid_catches_without_on_clauses: ignore
+    directives_ordering: ignore
+    always_use_package_imports: ignore
+    inference_failure_on_function_invocation: ignore
+    no_default_cases: ignore
+    strict_raw_type: ignore
+    inference_failure_on_collection_literal: ignore
+    avoid_field_initializers_in_const_classes: ignore
+    constant_identifier_names: ignore
+    join_return_with_assignment: ignore
+    avoid_dynamic_calls: ignore
+    non_constant_identifier_names: ignore
+    parameter_assignments: ignore
+    avoid_positional_boolean_parameters: ignore
+    only_throw_errors: ignore
+    comment_references: ignore
+    use_setters_to_change_properties: ignore
+    avoid_slow_async_io: ignore
+    one_member_abstracts: ignore
+    inference_failure_on_generic_invocation: ignore
+    empty_catches: ignore
+    use_late_for_private_fields_and_variables: ignore
+    file_names: ignore
+
+linter:
+  rules:
+    - always_use_package_imports
+    - prefer_relative_imports: false
+    - cascade_invocations: false
+    - sort_constructors_first: false
+    - omit_local_variable_types: false
+    - sort_pub_dependencies: true

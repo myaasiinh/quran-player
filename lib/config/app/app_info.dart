@@ -1,0 +1,16 @@
+import 'package:package_info_plus/package_info_plus.dart';
+
+/* author
+   myaasiinh@gmail.com
+*/
+class AppInfo {
+  static late PackageInfo packageInfo;
+
+  static Future<void> init() async {
+    await PackageInfo.fromPlatform();
+  }
+
+  static String appVersion = AppInfo.packageInfo.version;
+  static String buildNumber = AppInfo.packageInfo.buildNumber;
+  static String packageName = AppInfo.packageInfo.packageName;
+}

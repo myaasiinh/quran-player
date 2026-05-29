@@ -1,0 +1,15 @@
+import '/config/themes/app_typography.dart';
+import 'package:flutter/material.dart';
+
+extension ContextExtension on BuildContext {
+  ColorScheme? get colorScheme => Theme.of(this).colorScheme;
+
+  bool get isDarkMode {
+    final brightness = Theme.of(this).brightness;
+    return brightness == Brightness.dark;
+  }
+
+  AppTypography get typography => Theme.of(this).extension<AppTypography>()!;
+
+  TextTheme get textTheme => Theme.of(this).textTheme;
+}
