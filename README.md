@@ -19,16 +19,17 @@ A premium mobile application for reciting and listening to the Holy Quran, built
 - **About Developer**: Dedicated profile page showcasing the author and project license.
 
 ## 📱 Visual Documentation
-You can find the app's visual documentation in the `screenshots/` folder:
-- **Splash Screen**: Animated mandala with central branding.
-- **Home / Surah List**: Premium list with real-time search.
-- **Surah Detail / Player**: Dynamic visualizer and auto-scrolling verses.
-- **About Page**: Developer profile and application info.
-- **Error Pages**: Spiritually themed 404 and 500 states.
+| Splash Screen | Home / Surah List | Surah Detail / Player |
+| :---: | :---: | :---: |
+| ![Splash](screenshots/splash.png) | ![Home](screenshots/home.png) | ![Detail](screenshots/detail.png) |
+
+| About Page |
+| :---: |
+| ![About](screenshots/about.png) |
 
 ## 📥 Download Release APK
 The latest production-ready APK is available at the root of this repository:
-👉 **[Al-Quran-Audio-Player.apk](./Al-Quran-Audio-Player.apk)**
+👉 **[quran.apk](./quran.apk)**
 
 ## 🛠️ Engineering Excellence (Principal/Staff Level)
 - **Zero-Lint Architecture**: Lulus audit `flutter analyze` dengan **0 Error, 0 Warning, dan 0 Info**.
