@@ -1,66 +1,87 @@
-import '/config/themes/app_colors.dart';
-import '/ui/widgets/colored_status_bar.dart';
-import '/ui/widgets/platform_loading_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quran_player/config/themes/app_colors.dart';
+import 'package:quran_player/ui/views/splash/splash_controller.dart';
+import 'package:quran_player/ui/views/splash/widgets/mandala_painter_widget.dart';
+import 'package:quran_player/ui/widgets/colored_status_bar.dart';
 
-class SplashView extends StatelessWidget {
+/// [SplashView] adalah representasi visual dari startup aplikasi.
+/// Principal Note: View ini menggunakan SplashController untuk akses
+/// state lifecycle yang dikelola oleh GetX.
+class SplashView extends GetView<SplashController> {
   const SplashView({super.key});
   static const String route = '/splash';
 
   @override
   Widget build(BuildContext context) {
-    return const ColoredStatusBar(
+    // Explicit find untuk menjamin controller teregistrasi saat view dibangun.
+    Get.find<SplashController>();
+
+    return ColoredStatusBar(
       child: Scaffold(
-        backgroundColor: AppColors.primary,
-        body: Center(child: PlatformLoadingIndicator(color: Colors.white)),
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          // Menggunakan background gradient premium untuk kesan spiritual dan modern.
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFF1E3C72),
+                Color(0xFF2A5298),
+                AppColors.primary,
+              ],
+            ),
+          ),
+          child: const Stack(
+            children: [
+              // Latar belakang animasi kustom Mandala Painter (OP UI).
+              Center(child: MandalaPainterWidget()),
+              // Konten teks dan indikator progres.
+              Center(
+                child: SplashContent(),
+              ),
+            ],
+          ),
+        ),
       ),
     );
+  }
+}
 
-    // return ColoredStatusBar(
-    //   brightness: Brightness.light,
-    //   child: Scaffold(
-    //     backgroundColor: AppColors.primary,
-    //     body: ContentWrapper(
-    //       bottom: true,
-    //       child: Center(
-    //         child: Column(
-    //           mainAxisAlignment: MainAxisAlignment.center,
-    //           children: [
-    //             Expanded(
-    //               child: Column(
-    //                 mainAxisAlignment: MainAxisAlignment.center,
-    //                 children: [
-    //                   Container(
-    //                     height: 170,
-    //                     width: 170,
-    //                     padding: const EdgeInsets.all(20),
-    //                     decoration: BoxDecoration(
-    //                       borderRadius: BorderRadius.circular(180),
-    //                       color: Colors.white,
-    //                     ),
-    //                     child: const FlutterLogo(),
-    //                   ),
-    //                   const SizedBox(height: 20),
-    //                   Text(
-    //                     AppConfiguration.appName,
-    //                     style: AppStyle.headline2.copyWith(color: Colors.white),
-    //                   ),
-    //                   Text(
-    //                     AppConfiguration.appTag,
-    //                     style: const TextStyle(color: Colors.white),
-    //                   ),
-    //                 ],
-    //               ),
-    //             ),
-    //             Text(
-    //               '${'txt_version'.tr} ${AppConfiguration.appVersion}',
-    //               style: const TextStyle(color: Colors.white),
-    //             ),
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
+/// Konten utama pada Splash screen dipisahkan untuk menjaga keterbacaan kode (SoC).
+class SplashContent extends StatelessWidget {
+  const SplashContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Ikon modern yang merepresentasikan Al-Quran.
+        const Icon(
+          Icons.auto_stories,
+          size: 100,
+          color: Colors.white,
+        ),
+        const SizedBox(height: 24),
+        // Nama aplikasi terlokalisasi.
+        Text(
+          'txt_quran_title'.tr,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 2,
+          ),
+        ),
+        const SizedBox(height: 16),
+        // Indikator pemuatan statis namun terlihat dinamis dengan background animasi.
+        const CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.white70),
+        ),
+      ],
+    );
   }
 }
