@@ -77,14 +77,14 @@ abstract base class ApiTokenManager extends QueuedInterceptorsWrapper
   ) async {
     final accessToken = await secureStorage.getToken();
     final refreshToken = await secureStorage.getRefreshToken();
-    
+
     /// Jika terjadi 401 dan token tersedia, coba ambil token baru.
     if (accessToken != null && err.response?.statusCode == 401) {
       final newToken = await _getAccessToken(
         refreshToken: refreshToken.toString(),
       );
       await secureStorage.setToken(value: newToken.toString());
-      
+
       /// Lakukan retry request asli dengan token baru.
       return handler.resolve(await _retry(dio, err.requestOptions));
     } else {

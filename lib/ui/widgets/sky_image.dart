@@ -1,9 +1,9 @@
+import 'package:quran_player/ui/widgets/sky_appbar.dart';
 import 'dart:async';
 import 'dart:io';
 
 import 'package:quran_player/core/helper/app_logger.dart';
 
-import '/config/themes/app_colors.dart';
 import '/core/extension/string_extension.dart';
 import '/core/helper/media_helper.dart';
 import '/ui/widgets/media/preview/media_preview_page.dart';
@@ -142,7 +142,7 @@ class SkyImage extends StatelessWidget {
           BaseImage(
             src: generateByName.isNotNullAndNotEmpty
                 ? MediaHelper.generateAvatarByName(generateByName ?? 'user')
-                : placeholderSrc ?? AppImages.imgNotFound.path,
+                : placeholderSrc ?? AppImages.imgNotFound,
             width: width,
             height: height,
             fit: placeholderFit ?? BoxFit.contain,

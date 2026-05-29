@@ -1,6 +1,6 @@
+import 'package:quran_player/ui/widgets/sky_appbar.dart';
 import 'dart:io';
 
-import '/config/themes/app_colors.dart';
 import '/core/helper/bottom_sheet_helper.dart';
 import '/core/helper/media_helper.dart';
 import '/ui/widgets/media/attachments_source_bottom_sheet.dart';
@@ -49,7 +49,7 @@ class AvatarPicker extends StatelessWidget {
                       ? MediaHelper.generateAvatarByName(
                           namePlaceholder.toString(),
                         )
-                      : AppImages.imgPlaceholderUser.path),
+                      : AppImages.imgPlaceholderUser),
             ),
           ),
           Container(

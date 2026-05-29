@@ -1,4 +1,4 @@
-import '/config/themes/app_colors.dart';
+import 'package:quran_player/ui/widgets/sky_appbar.dart';
 import '/ui/widgets/sky_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -55,7 +55,7 @@ class EmptyView extends StatelessWidget {
           children: [
             emptyImageWidget ??
                 Image.asset(
-                  emptyImage ?? AppImages.imgEmpty.path,
+                  emptyImage ?? AppImages.imgEmpty,
                   height: imageHeight,
                   width: imageWidth,
                 ),

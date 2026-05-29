@@ -38,7 +38,10 @@ base class ApiInterceptors extends ApiTokenManager {
   }
 
   @override
-  Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
+  Future<void> onError(
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
     /// Mencatat log jika terjadi kegagalan pada request HTTP.
     AppLogger.debug(
       '<-- ${err.response?.statusCode} ${err.response?.requestOptions.uri}',

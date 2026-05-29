@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quran_player/core/extension/context_extension.dart';
 
-/// [CrashError_View] adalah halaman fallback saat terjadi System Failure (HTTP 500).
+/// [CrashErrorView] adalah halaman fallback saat terjadi System Failure (HTTP 500).
 /// Principal Note: Menggunakan pendekatan spiritual dengan kutipan Al-Quran untuk
 /// menenangkan pengguna saat menghadapi kesalahan teknis yang tidak terduga.
 class CrashErrorView extends StatelessWidget {
@@ -44,7 +44,10 @@ class CrashErrorView extends StatelessWidget {
             const Text(
               '"Allah tidak membebani seseorang melainkan sesuai dengan kesanggupannya."',
               textAlign: TextAlign.center,
-              style: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey),
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+                color: Colors.grey,
+              ),
             ),
             const SizedBox(height: 32),
 
@@ -66,8 +69,10 @@ class CrashErrorView extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: context.colorScheme!.primary,
                 foregroundColor: Colors.white,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 12,
+                ),
               ),
             ),
           ],

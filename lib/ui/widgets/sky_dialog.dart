@@ -1,3 +1,4 @@
+import 'package:quran_player/ui/widgets/sky_appbar.dart';
 /* author
    myaasiinh@gmail.com
 */
@@ -81,7 +82,7 @@ class DialogAlert extends StatelessWidget {
         header: Padding(
           padding: const EdgeInsets.all(6),
           child: header ??
-              SkyImage(src: AppIcons.icSuccess.path, fit: BoxFit.contain),
+              const SkyImage(src: AppIcons.icSuccess, fit: BoxFit.contain),
         ),
         onConfirm: onConfirm,
         backgroundColorHeader:
@@ -104,7 +105,7 @@ class DialogAlert extends StatelessWidget {
         header: Padding(
           padding: const EdgeInsets.all(6),
           child: header ??
-              SkyImage(src: AppIcons.icFailed.path, fit: BoxFit.contain),
+              const SkyImage(src: AppIcons.icFailed, fit: BoxFit.contain),
         ),
         onConfirm: onConfirm,
         backgroundColorHeader:
@@ -128,8 +129,8 @@ class DialogAlert extends StatelessWidget {
         description: description,
         isDismissible: isDismissible,
         header: header ??
-            SkyImage(
-              src: AppIcons.icWarning.path,
+            const SkyImage(
+              src: AppIcons.icWarning,
               color: Colors.orange,
               fit: BoxFit.contain,
             ),
@@ -161,7 +162,7 @@ class DialogAlert extends StatelessWidget {
         header: Padding(
           padding: const EdgeInsets.all(6),
           child: header ??
-              SkyImage(src: AppIcons.icFailed.path, fit: BoxFit.contain),
+              const SkyImage(src: AppIcons.icFailed, fit: BoxFit.contain),
         ),
         onConfirm: onConfirm,
         onCancel: onCancel,
@@ -184,8 +185,8 @@ class DialogAlert extends StatelessWidget {
         description: description,
         isDismissible: isDismissible,
         header: header ??
-            SkyImage(
-              src: AppIcons.icWarning.path,
+            const SkyImage(
+              src: AppIcons.icWarning,
               color: Colors.orange,
               fit: BoxFit.contain,
             ),

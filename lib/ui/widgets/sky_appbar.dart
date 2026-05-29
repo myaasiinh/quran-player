@@ -51,3 +51,23 @@ abstract class SkyAppBar {
     );
   }
 }
+
+/// [AppImages] dan [AppIcons] bertindak sebagai registry asset statis.
+/// Principal Note: Mempermudah penggantian path asset secara global.
+abstract class AppImages {
+  static const String imgError = 'assets/images/img_error.png';
+  static const String imgEmpty = 'assets/images/img_empty.png';
+  static const String avatarPlaceholder =
+      'assets/images/img_avatar_placeholder.png';
+  static const String imgPlaceholderUser =
+      'assets/images/img_avatar_placeholder.png';
+  static const String imgNotFound = 'assets/images/img_error.png';
+}
+
+abstract class AppIcons {
+  static const String icSuccess = 'assets/icons/ic_success.png';
+  static const String icWarning = 'assets/icons/ic_warning.png';
+  static const String icError = 'assets/icons/ic_error.png';
+  static const String icInfo = 'assets/icons/ic_info.png';
+  static const String icFailed = 'assets/icons/ic_error.png';
+}
