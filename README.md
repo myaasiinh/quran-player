@@ -56,7 +56,7 @@ Professional engineering involves making deliberate choices. Below is the ration
 | <img src="screenshots/splash.png" width="200"> | <img src="screenshots/home.png" width="200"> | <img src="screenshots/detail.png" width="200"> | <img src="screenshots/about.png" width="200"> |
 
 ### Demo Video
-👉 **[Watch App Demo on GitHub](https://github.com/user-attachments/assets/c331189e-9010-4e2f-8562-b511eef768bf)**
+👉 **[Watch App Demo](./screenshots/demo-app-final-compress.mp4)**
 
 ---
 
