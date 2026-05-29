@@ -49,9 +49,10 @@ class SurahDetailView extends GetView<SurahDetailController> {
             child: Column(
               children: [
                 const SizedBox(height: 100),
-                // Area daftar ayat yang scrollable.
+                // Area daftar ayat yang scrollable dengan Auto-Scroll.
                 Expanded(
                   child: ListView.builder(
+                    controller: controller.scrollController,
                     padding: const EdgeInsets.all(16),
                     itemCount: controller.dataList.length,
                     itemBuilder: (context, index) {
@@ -66,7 +67,9 @@ class SurahDetailView extends GetView<SurahDetailController> {
                           unawaited(controller.player.play());
                         },
                         ayah: ayah,
-                        isCurrent: controller.currentAyahIndex.value == index,
+                        // Highlight hanya aktif jika audio sedang diputar.
+                        isCurrent: controller.isPlaying.value &&
+                            controller.currentAyahIndex.value == index,
                       );
                     },
                   ),

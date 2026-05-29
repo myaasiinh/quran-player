@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:quran_player/config/base/base_controller.dart';
@@ -18,6 +19,9 @@ class SurahDetailController extends BaseController<AyahModel> {
   final QuranRepository repository;
   final AudioPlayer player;
 
+  // Controller untuk menangani scroll list ayat secara otomatis.
+  final ScrollController scrollController = ScrollController();
+
   // Data surah yang diterima dari argument navigasi.
   final Rxn<SurahModel> surah = Rxn<SurahModel>();
 
@@ -31,6 +35,11 @@ class SurahDetailController extends BaseController<AyahModel> {
   void onInit() {
     // Mengambil data surah dari argumen navigasi.
     surah.value = Get.arguments as SurahModel?;
+    
+    // Principal Note: Listener 'ever' memantau perubahan index ayat yang diputar.
+    // Jika index berubah, trigger fungsi _scrollToCurrentAyah.
+    ever(currentAyahIndex, (_) => _scrollToCurrentAyah());
+    
     super.onInit();
   }
 
@@ -56,7 +65,6 @@ class SurahDetailController extends BaseController<AyahModel> {
   }
 
   /// Mengatur playlist audio berdasarkan daftar ayat yang tersedia.
-  /// Principal Note: Menggunakan ConcatenatingAudioSource untuk transisi audio yang mulus.
   Future<void> _setupPlaylist() async {
     if (dataList.isEmpty) return;
 
@@ -82,6 +90,23 @@ class SurahDetailController extends BaseController<AyahModel> {
     });
   }
 
+  /// Memindahkan scroll ke ayat yang sedang diputar.
+  /// Principal Note: Menggunakan perhitungan offset (estimasi tinggi item 100px)
+  /// untuk memusatkan tampilan pada ayat yang aktif.
+  void _scrollToCurrentAyah() {
+    if (scrollController.hasClients) {
+      // Estimasi offset: Index * Rata-rata tinggi item.
+      final offset = currentAyahIndex.value * 100.0;
+      unawaited(
+        scrollController.animateTo(
+          offset,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeInOut,
+        ),
+      );
+    }
+  }
+
   /// Fungsi untuk memulai atau menghentikan pemutaran audio.
   void playPause() {
     if (player.playing) {
@@ -97,7 +122,6 @@ class SurahDetailController extends BaseController<AyahModel> {
   }
 
   /// Pindah ke ayat berikutnya jika tersedia.
-  /// Principal Note: Cek hasNext mencegah bug restart playlist di akhir item.
   void next() {
     if (player.hasNext) {
       unawaited(player.seekToNext());
@@ -113,8 +137,9 @@ class SurahDetailController extends BaseController<AyahModel> {
 
   @override
   Future<void> onClose() async {
-    // Melepaskan resource player untuk mencegah memory leak.
+    // Melepaskan resource player dan controller scroll.
     await player.dispose();
+    scrollController.dispose();
     await super.onClose();
   }
 }
