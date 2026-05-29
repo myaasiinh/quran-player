@@ -41,7 +41,7 @@ Professional engineering involves making deliberate choices. Below is the ration
 ---
 
 ## ✨ "OP" UI/UX Highlights
-- **Mandala Custom Animation**:Rotating mandala backdrop on the splash screen using mathematically generated geometry.
+- **Mandala Custom Animation**: Rotating mandala backdrop on the splash screen using mathematically generated geometry.
 - **Dynamic Audio Visualizer**: Real-time sound wave simulation reactive to playback status.
 - **Auto-Scroll & Smart Highlighting**: Verse list automatically scrolls to and highlights the currently playing ayah.
 - **Spiritual Error UX**: Redesigned 404/500 pages with Quranic references to calm users during errors.
@@ -56,7 +56,7 @@ Professional engineering involves making deliberate choices. Below is the ration
 | <img src="screenshots/splash.png" width="200"> | <img src="screenshots/home.png" width="200"> | <img src="screenshots/detail.png" width="200"> | <img src="screenshots/about.png" width="200"> |
 
 ### Demo Video
-👉 **[Watch App Demo](./screenshots/demo-app-final-compress.mp4)**
+<video src="https://github.com/user-attachments/assets/5f6a5710-14a2-488c-a3c0-265bdabee833" controls autoplay loop muted playsinline width="100%"></video>
 
 ---
 
@@ -78,12 +78,7 @@ Aplikasi ini telah divalidasi dengan **6 pengujian otomatis** yang mencakup Unit
 
 ## 📦 Installation & Setup
 ```bash
-git clone https://github.com/myaasiinh/quran-player.git
+git clone [https://github.com/myaasiinh/quran-player.git](https://github.com/myaasiinh/quran-player.git)
 cd quran_player
 flutter pub get
 flutter run
-```
-
----
-**Developed by:** Muhammad Yaasiin Hidayatulloh (Staff Software Architect)  
-**Status:** 👑 **ULTIMATE EDITION - PRODUCTION READY**
