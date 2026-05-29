@@ -6,7 +6,7 @@ A premium mobile application for reciting and listening to the Holy Quran, built
 - **Mandala Custom Animation**: A mathematically generated, rotating mandala backdrop on the splash screen using `CustomPaint`, symbolizing spiritual harmony.
 - **Dynamic Audio Visualizer**: Real-time sound wave simulation using Sine algorithms, reactive to playback status for an immersive listening experience.
 - **Auto-Scroll & Smart Highlighting**: The verse list automatically scrolls to and highlights the currently playing ayah in real-time, perfectly synced with the audio engine.
-- **Spiritual Error UX**: Custom-designed 404 (Not Found) and 500 (Crash) pages featuring Quranic references (QS. Al-Fatihah: 6 & QS. Al-Baqarah: 286) to guide and calm users during system failures.
+- **Spiritual Error UX**: Custom-designed 404 (Not Found) and 500 (Crash) pages featuring Quranic references (QS. Al-Fatihah: 6 & QS. Al-Baqarah: 286) with prominent "Al-Quran" branding to guide and calm users during system failures.
 - **Premium Design System**: A colorful yet sophisticated palette with elegant gradients, translucent "Glassmorphism" cards, and high-quality typography.
 - **Zero-Hardcode Policy**: 100% of UI strings are localized using GetX translations (`.tr`) for seamless Indonesian and English support.
 
@@ -37,20 +37,18 @@ The latest production-ready APK is available at the root of this repository:
 - **Zero-Lint Architecture**: Lulus audit `flutter analyze` dengan **0 Error, 0 Warning, dan 0 Info**.
 - **Clean MVVM**: Strict decoupling between Model, View, Controller, and Repository layers.
 - **Full Async Safety**: All futures are properly managed with `await` or `unawaited()` to prevent race conditions.
-- **Exhaustive Documentation**: Every single file features line-by-line Indonesian documentation explaining the "Why" behind architectural choices.
+- **Exhaustive Documentation**: Setiap file dilengkapi dokumentasi baris-demi-baris dalam Bahasa Indonesia menjelaskan rationale arsitektural.
 - **Atomic Widgets**: UI components are broken down into small, reusable, and testable units.
 
 ## 🧪 Testing Suite (100% Verified)
-Comprehensive automated validation coverage:
-- **Repository Unit Tests**: Data orchestration and caching logic.
-- **Controller Unit Tests**: Business rules, search algorithms, and playlist state.
-- **Widget Tests**: Full UI integration, auto-scroll behavior, and localization sync.
+Aplikasi ini telah divalidasi dengan 6 pengujian otomatis yang mencakup Unit Test (Controller & Repository) serta Widget Test (UI).
 
-### 💡 Android Studio Test History
-Untuk memastikan riwayat testing tersimpan di Android Studio:
-1. Buka **Run/Debug Configurations**.
-2. Pilih konfigurasi **Flutter Test**.
-3. Pastikan opsi **"Save test results"** aktif atau gunakan folder `.idea/runConfigurations` yang sudah saya sertakan untuk menjaga persistensi setting.
+![Test Results](screenshots/testing-sukses-unit-ui.png)
+
+### 💡 Android Studio Test History Persistence
+Untuk memastikan riwayat testing tersimpan dan dapat dilihat kembali di Android Studio:
+1. **Gunakan Run Configuration**: Selalu jalankan tes melalui menu **Run > All Tests** (sudah saya sertakan di folder `.idea/runConfigurations`).
+2. **Tab Test History**: Klik ikon jam (clock) di toolbar tab **Run** untuk membuka "Recent Tests".
 
 ## 📦 Installation & Setup
 ```bash

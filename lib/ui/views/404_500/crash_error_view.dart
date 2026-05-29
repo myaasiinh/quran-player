@@ -29,13 +29,15 @@ class CrashErrorView extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            /// Branding Al-Quran untuk konsistensi di halaman error.
+            /// Branding Al-Quran Premium (Sesuai gaya Splash).
+            /// Principal Note: Dibuat lebih kontras agar branding tetap terlihat jelas.
             Text(
               'txt_quran_title'.tr,
-              style: context.typography.body2.copyWith(
-                color: Colors.grey,
-                letterSpacing: 2,
+              textAlign: TextAlign.center,
+              style: context.typography.headline3.copyWith(
+                color: context.colorScheme!.primary.withValues(alpha: 0.6),
                 fontWeight: FontWeight.bold,
+                letterSpacing: 4,
               ),
             ),
             const SizedBox(height: 24),
