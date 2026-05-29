@@ -16,6 +16,19 @@ A premium mobile application for reciting and listening to the Holy Quran, built
 - **Continuous Ayah Playback**: Seamless audio streaming per verse using the high-performance `just_audio` engine.
 - **Integrated Player Control**: Play, Pause, Next, Previous, and Seeking via a custom-styled, interactive progress bar.
 - **Intelligent Offline Caching**: Repository-level caching using `GetStorage` ensures the app is always fast and available, even without internet.
+- **About Developer**: Dedicated profile page showcasing the author and project license.
+
+## 📱 Visual Documentation
+You can find the app's visual documentation in the `screenshots/` folder:
+- **Splash Screen**: Animated mandala with central branding.
+- **Home / Surah List**: Premium list with real-time search.
+- **Surah Detail / Player**: Dynamic visualizer and auto-scrolling verses.
+- **About Page**: Developer profile and application info.
+- **Error Pages**: Spiritually themed 404 and 500 states.
+
+## 📥 Download Release APK
+The latest production-ready APK is available at the root of this repository:
+👉 **[Al-Quran-Audio-Player.apk](./Al-Quran-Audio-Player.apk)**
 
 ## 🛠️ Engineering Excellence (Principal/Staff Level)
 - **Zero-Lint Architecture**: Lulus audit `flutter analyze` dengan **0 Error, 0 Warning, dan 0 Info**.
