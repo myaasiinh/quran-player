@@ -25,9 +25,9 @@ A premium mobile application for reciting and listening to the Holy Quran, built
 | <img src="screenshots/splash.png" width="200"> | <img src="screenshots/home.png" width="200"> | <img src="screenshots/detail.png" width="200"> | <img src="screenshots/about.png" width="200"> |
 
 ### Demo Video
-[![Watch the Demo](https://img.shields.io/badge/🎥-Watch_App_Demo-blue?style=for-the-badge)](screenshots/demo-app-final-compress.mp4)
+https://github.com/user-attachments/assets/c331189e-9010-4e2f-8562-b511eef768bf
 
-> *Note: If the video doesn't play directly in your browser, you can download it from the `screenshots/` folder.*
+> *Note: Klik link di atas untuk memutar video demo aplikasi secara langsung.*
 
 ## 📥 Download Release APK
 The latest production-ready APK is available at the root of this repository:
@@ -50,7 +50,7 @@ Comprehensive automated validation coverage:
 Untuk memastikan riwayat testing tersimpan di Android Studio:
 1. Buka **Run/Debug Configurations**.
 2. Pilih konfigurasi **Flutter Test**.
-3. Pastikan opsi **"Save test results"** (jika tersedia di versi plugin Anda) aktif atau gunakan folder `.idea/runConfigurations` yang sudah saya sertakan untuk menjaga persistensi setting.
+3. Pastikan opsi **"Save test results"** aktif atau gunakan folder `.idea/runConfigurations` yang sudah saya sertakan untuk menjaga persistensi setting.
 
 ## 📦 Installation & Setup
 ```bash
