@@ -110,7 +110,6 @@ class _PlayerControlPanelState extends State<PlayerControlPanel>
                         bufferedBarColor:
                             context.colorScheme!.primary.withValues(alpha: 0.2),
                         thumbColor: context.colorScheme!.primary,
-                        barHeight: 5,
                         thumbRadius: 8,
                       );
                     },

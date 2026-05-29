@@ -9,20 +9,27 @@ import 'package:quran_player/ui/widgets/colored_status_bar.dart';
 /// Principal Note: View ini menggunakan SplashController untuk akses
 /// state lifecycle yang dikelola oleh GetX.
 class SplashView extends GetView<SplashController> {
+  /// Konstruktor konstan untuk optimasi performa widget.
   const SplashView({super.key});
+
+  /// Rute navigasi unik untuk halaman Splash.
   static const String route = '/splash';
 
   @override
   Widget build(BuildContext context) {
-    // Explicit find untuk menjamin controller teregistrasi saat view dibangun.
+    /// Explicit find untuk menjamin controller teregistrasi saat view dibangun.
     Get.find<SplashController>();
 
     return ColoredStatusBar(
       child: Scaffold(
         body: Container(
+          /// Mengatur lebar container memenuhi layar.
           width: double.infinity,
+
+          /// Mengatur tinggi container memenuhi layar.
           height: double.infinity,
-          // Menggunakan background gradient premium untuk kesan spiritual dan modern.
+
+          /// Menggunakan background gradient premium untuk kesan spiritual dan modern.
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -35,13 +42,13 @@ class SplashView extends GetView<SplashController> {
             ),
           ),
           child: const Stack(
+            alignment: Alignment.center,
             children: [
-              // Latar belakang animasi kustom Mandala Painter (OP UI).
-              Center(child: MandalaPainterWidget()),
-              // Konten teks dan indikator progres.
-              Center(
-                child: SplashContent(),
-              ),
+              /// Latar belakang animasi kustom Mandala Painter (OP UI).
+              MandalaPainterWidget(),
+
+              /// Konten teks dan ikon yang diletakkan tepat di tengah mandala.
+              SplashContent(),
             ],
           ),
         ),
@@ -52,34 +59,42 @@ class SplashView extends GetView<SplashController> {
 
 /// Konten utama pada Splash screen dipisahkan untuk menjaga keterbacaan kode (SoC).
 class SplashContent extends StatelessWidget {
+  /// Konstruktor konstan untuk SplashContent.
   const SplashContent({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      /// Mengatur alignment vertikal di tengah.
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Ikon modern yang merepresentasikan Al-Quran.
+        /// Ikon modern yang merepresentasikan Al-Quran, diposisikan di pusat mandala.
         const Icon(
           Icons.auto_stories,
-          size: 100,
+          size: 80,
           color: Colors.white,
         ),
-        const SizedBox(height: 24),
-        // Nama aplikasi terlokalisasi.
+
+        /// Memberikan jarak antara ikon dan teks.
+        const SizedBox(height: 16),
+
+        /// Nama aplikasi terlokalisasi dengan gaya font premium.
         Text(
           'txt_quran_title'.tr,
+          textAlign: TextAlign.center,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 32,
+            fontSize: 28,
             fontWeight: FontWeight.bold,
-            letterSpacing: 2,
+            letterSpacing: 1.5,
+            shadows: [
+              Shadow(
+                blurRadius: 10,
+                color: Colors.black26,
+                offset: Offset(0, 2),
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 16),
-        // Indikator pemuatan statis namun terlihat dinamis dengan background animasi.
-        const CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.white70),
         ),
       ],
     );

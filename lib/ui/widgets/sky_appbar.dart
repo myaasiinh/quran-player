@@ -1,55 +1,53 @@
+import 'package:flutter/material.dart';
+import 'package:quran_player/config/themes/app_colors.dart';
+import 'package:quran_player/ui/widgets/base/base_appbar.dart';
+
 /* author
    myaasiinh@gmail.com
 */
 
-import '/config/themes/app_colors.dart';
-import '/ui/widgets/base/base_appbar.dart';
-import 'package:flutter/material.dart';
-
+/// [SkyAppBar] menyediakan desain AppBar terstandarisasi untuk aplikasi.
+/// Principal Note: Menggunakan pola factory method untuk konsistensi visual di seluruh layar.
 abstract class SkyAppBar {
-  /// Use [SkyAppBar.primary] as a default AppBar globally.
-  /// * Can edited for specific requirement.
+  /// [primary] AppBar standar dengan background warna utama.
   static PreferredSizeWidget primary({
-    String? title,
-    Color? backgroundColor,
-    Color? iconColor,
+    required String title,
+    bool centerTitle = false,
     List<Widget>? actions,
-    bool? centerTitle = false,
-    TextStyle? titleStyle,
-  }) {
-    return BaseAppBar(
-      title: title,
-      action: actions,
-      backgroundColor: backgroundColor,
-      titleStyle:
-          titleStyle ?? const TextStyle(fontSize: 16, color: AppColors.primary),
-      elevation: 0,
-      centerTitle: centerTitle,
-      iconColor: iconColor ?? Colors.grey,
-    );
-  }
-
-  /// Use [SkyAppBar.secondary] as an secondary AppBar for some pages.
-  /// * Can edited for specific requirement.
-  static PreferredSizeWidget secondary({
-    String? title,
     Color? backgroundColor,
     Color? textColor,
     Color? iconColor,
-    List<Widget>? action,
-    bool? centerTitle,
+    double? elevation,
   }) {
     return BaseAppBar(
       title: title,
-      centerTitle: centerTitle ?? true,
-      action: action,
-      backgroundColor: AppColors.primary,
+      centerTitle: centerTitle,
+      action: actions,
+      backgroundColor: backgroundColor ?? AppColors.primary,
       titleStyle: TextStyle(color: textColor ?? Colors.white),
       iconColor: iconColor ?? Colors.white,
+      elevation: elevation,
     );
   }
 
-  ///
-  /// Add other AppBar if needed.
-  ///
+  /// [secondary] AppBar standar dengan background warna permukaan (surface/white).
+  static PreferredSizeWidget secondary({
+    required String title,
+    bool centerTitle = false,
+    List<Widget>? action,
+    Color? backgroundColor,
+    Color? textColor,
+    Color? iconColor,
+    double? elevation,
+  }) {
+    return BaseAppBar(
+      title: title,
+      centerTitle: centerTitle,
+      action: action,
+      backgroundColor: backgroundColor ?? AppColors.white,
+      titleStyle: TextStyle(color: textColor ?? AppColors.black),
+      iconColor: iconColor ?? AppColors.black,
+      elevation: elevation,
+    );
+  }
 }

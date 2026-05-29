@@ -33,6 +33,7 @@ analyzer:
     empty_catches: ignore
     use_late_for_private_fields_and_variables: ignore
     file_names: ignore
+    omit_local_variable_types: ignore
 
 linter:
   rules:
