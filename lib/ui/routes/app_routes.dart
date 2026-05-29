@@ -1,8 +1,9 @@
-import 'package:quran_player/ui/views/surah_detail/surah_detail_route.dart';
-import 'package:quran_player/ui/views/surah_list/surah_list_route.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:quran_player/ui/views/about/about_route.dart';
 import 'package:quran_player/ui/views/splash/splash_route.dart';
 import 'package:quran_player/ui/views/splash/splash_view.dart';
-import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:quran_player/ui/views/surah_detail/surah_detail_route.dart';
+import 'package:quran_player/ui/views/surah_list/surah_list_route.dart';
 
 class AppPages {
   static const String initial = SplashView.route;
@@ -11,5 +12,6 @@ class AppPages {
     ...splashRoute,
     ...surahListRoute,
     ...surahDetailRoute,
+    ...aboutRoute,
   ];
 }

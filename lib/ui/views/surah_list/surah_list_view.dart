@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quran_player/core/extension/context_extension.dart';
+import 'package:quran_player/ui/views/about/about_view.dart';
 import 'package:quran_player/ui/views/surah_detail/surah_detail_view.dart';
 import 'package:quran_player/ui/views/surah_list/surah_list_controller.dart';
 import 'package:quran_player/ui/widgets/base/state_view.dart';
@@ -24,6 +25,12 @@ class SurahListView extends GetView<SurahListController> {
         title: 'txt_quran_title'.tr,
         centerTitle: true,
         backgroundColor: Colors.transparent,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person_outline, color: Colors.white),
+            onPressed: () => Get.toNamed(AboutView.route),
+          ),
+        ],
       ),
       body: Container(
         // Latar belakang gradient untuk konsistensi desain dengan Splash.

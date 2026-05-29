@@ -123,4 +123,10 @@ const Map<String, String> en = {
   'txt_meccan': 'Meccan',
   'txt_medinan': 'Medinan',
   'txt_ayahs': 'Ayahs',
+
+  // About Me
+  'txt_about_me': 'About Me',
+  'txt_about_description': 'This Al-Quran Audio Player application was developed as part of a technical test. It uses Clean MVVM Architecture with GetX for state management. The main focus is on high performance, custom animations, and industry-standard code quality.',
+  'txt_license': 'License',
+  'txt_app_version': 'App Version',
 };
