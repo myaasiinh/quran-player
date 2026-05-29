@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quran_player/core/extension/context_extension.dart';
 
-/// [CrashErrorView] adalah halaman fallback saat terjadi System Failure (HTTP 500).
-/// Principal Note: Menggunakan pendekatan spiritual dengan kutipan Al-Quran untuk 
+/// [CrashError_View] adalah halaman fallback saat terjadi System Failure (HTTP 500).
+/// Principal Note: Menggunakan pendekatan spiritual dengan kutipan Al-Quran untuk
 /// menenangkan pengguna saat menghadapi kesalahan teknis yang tidak terduga.
 class CrashErrorView extends StatelessWidget {
   const CrashErrorView({required this.errorDetails, super.key});
@@ -20,15 +20,15 @@ class CrashErrorView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Ikon peringatan spiritual (Sabar & Tawakal).
+            /// Ikon peringatan spiritual (Sabar & Tawakal).
             Icon(
               Icons.sentiment_very_dissatisfied_rounded,
               size: 100,
               color: context.colorScheme!.error.withValues(alpha: 0.5),
             ),
             const SizedBox(height: 24),
-            
-            // Judul Error (Terlokalisasi).
+
+            /// Judul Error (Terlokalisasi).
             Text(
               'txt_crash_error_title'.tr,
               textAlign: TextAlign.center,
@@ -38,17 +38,17 @@ class CrashErrorView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            
-            // Kutipan Ayat Al-Quran untuk Error 500 (QS. Al-Baqarah: 286).
-            // Principal Note: Memberikan konteks Quranic pada aplikasi bertema Quran.
+
+            /// Kutipan Ayat Al-Quran untuk Error 500 (QS. Al-Baqarah: 286).
+            /// Principal Note: Memberikan konteks Quranic pada aplikasi bertema Quran.
             const Text(
               '"Allah tidak membebani seseorang melainkan sesuai dengan kesanggupannya."',
               textAlign: TextAlign.center,
               style: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey),
             ),
             const SizedBox(height: 32),
-            
-            // Pesan Error untuk User atau Developer.
+
+            /// Pesan Error untuk User atau Developer.
             Text(
               kDebugMode
                   ? errorDetails.exceptionAsString()
@@ -57,16 +57,17 @@ class CrashErrorView extends StatelessWidget {
               style: context.typography.body1,
             ),
             const SizedBox(height: 48),
-            
-            // Tombol Refresh/Kembali.
+
+            /// Tombol Refresh/Kembali.
             ElevatedButton.icon(
-              onPressed: () => Get.back(),
+              onPressed: Get.back,
               icon: const Icon(Icons.refresh),
               label: Text('txt_retry'.tr),
               style: ElevatedButton.styleFrom(
                 backgroundColor: context.colorScheme!.primary,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
               ),
             ),
           ],

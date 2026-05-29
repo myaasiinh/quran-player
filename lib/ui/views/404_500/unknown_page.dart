@@ -41,7 +41,7 @@ class UnknownView extends StatelessWidget {
               color: context.colorScheme!.primary.withValues(alpha: 0.6),
             ),
             const SizedBox(height: 32),
-            
+
             // Judul Not Found.
             Text(
               'txt_not_found'.tr,
@@ -52,7 +52,7 @@ class UnknownView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            
+
             // Kutipan Ayat Al-Quran untuk 404 (QS. Al-Fatihah: 6).
             const Text(
               '"Tunjukkanlah kami jalan yang lurus."',
@@ -64,7 +64,7 @@ class UnknownView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 32),
-            
+
             // Deskripsi Error (Terlokalisasi).
             const Text(
               'Maaf, halaman yang Anda cari tidak tersedia atau telah dipindahkan.',
@@ -72,7 +72,7 @@ class UnknownView extends StatelessWidget {
               style: TextStyle(color: Colors.black45),
             ),
             const SizedBox(height: 48),
-            
+
             // Tombol kembali ke jalan yang benar (Home).
             ElevatedButton.icon(
               onPressed: () => Get.offAllNamed('/surah-list'),
@@ -81,7 +81,8 @@ class UnknownView extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: context.colorScheme!.primary,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

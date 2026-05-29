@@ -29,17 +29,19 @@ void main() {
     mockRepository = MockQuranRepository();
     mockStorage = MockGetStorage();
     mockPlayer = MockAudioPlayer();
-    
+
     Get.put<GetStorage>(mockStorage);
     Get.put(StorageManager());
 
-    // Stubbing interaksi storage.
+    /// Stubbing interaksi storage.
     when(() => mockStorage.read(any())).thenReturn(null);
     when(() => mockStorage.hasData(any<String>())).thenReturn(false);
 
-    // Mocking stream AudioPlayer untuk mengontrol reaktivitas controller.
-    when(() => mockPlayer.playerStateStream).thenAnswer((_) => const Stream.empty());
-    when(() => mockPlayer.currentIndexStream).thenAnswer((_) => const Stream.empty());
+    /// Mocking stream AudioPlayer untuk mengontrol reaktivitas controller.
+    when(() => mockPlayer.playerStateStream)
+        .thenAnswer((_) => const Stream.empty());
+    when(() => mockPlayer.currentIndexStream)
+        .thenAnswer((_) => const Stream.empty());
     when(() => mockPlayer.setAudioSource(any())).thenAnswer((_) async => null);
 
     controller = SurahDetailController(
@@ -55,25 +57,30 @@ void main() {
   group('SurahDetailController Unit Test', () {
     test('getSurahDetail success sets dataList and setup player playlist',
         () async {
-      // Arrange
+      /// Arrange
       final surah = SurahModel(number: 1, englishName: 'Al-Fatiha');
       controller.surah.value = surah;
 
       final ayahList = [
         AyahModel(
-            number: 1, text: 'Bismillah', audio: 'https://example.com/1.mp3'),
+          number: 1,
+          text: 'Bismillah',
+          audio: 'https://example.com/1.mp3',
+        ),
       ];
 
-      when(() => mockRepository.getSurahDetail(
-            surahNumber: 1,
-            edition: any(named: 'edition'),
-            cancelToken: any(named: 'cancelToken'),
-          )).thenAnswer((_) async => ayahList);
+      when(
+        () => mockRepository.getSurahDetail(
+          surahNumber: 1,
+          edition: any(named: 'edition'),
+          cancelToken: any(named: 'cancelToken'),
+        ),
+      ).thenAnswer((_) async => ayahList);
 
-      // Act
+      /// Act
       await controller.getSurahDetail();
 
-      // Assert: Pastikan data list terisi dan playlist diset ke player.
+      /// Assert: Pastikan data list terisi dan playlist diset ke player.
       expect(controller.dataList.length, 1);
       expect(controller.dataList.first.text, 'Bismillah');
       expect(controller.isSuccess, true);

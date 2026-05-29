@@ -23,17 +23,20 @@ void main() {
     Get.testMode = true;
     mockRepository = MockQuranRepository();
     mockStorage = MockGetStorage();
-    
-    // Setup dependensi singleton untuk widget testing.
+
+    /// Setup dependensi singleton untuk widget testing.
     Get.put<GetStorage>(mockStorage);
     Get.put(StorageManager());
     Get.put<QuranRepository>(mockRepository);
 
-    // Stubbing awal untuk mencegah error saat onReady controller dipanggil.
+    /// Stubbing awal untuk mencegah error saat onReady controller dipanggil.
     when(() => mockStorage.read(any())).thenReturn(null);
     when(() => mockStorage.hasData(any<String>())).thenReturn(false);
-    when(() => mockRepository.getSurahList(cancelToken: any(named: 'cancelToken')))
-        .thenAnswer((_) async => []);
+    when(
+      () => mockRepository.getSurahList(
+        cancelToken: any(named: 'cancelToken'),
+      ),
+    ).thenAnswer((_) async => []);
 
     controller = SurahListController(repository: mockRepository);
     Get.put(controller);
@@ -55,25 +58,33 @@ void main() {
 
   testWidgets('SurahListView should show title and list items after loading',
       (WidgetTester tester) async {
-    // Arrange: Siapkan data mock.
+    /// Arrange: Siapkan data mock.
     final surahList = [
       SurahModel(
-          number: 1,
-          name: 'الفاتحة',
-          englishName: 'The Opening',
-          numberOfAyahs: 7,
-          revelationType: 'Meccan'),
+        number: 1,
+        name: 'الفatحة',
+        englishName: 'The Opening',
+        numberOfAyahs: 7,
+        revelationType: 'Meccan',
+      ),
     ];
-    when(() => mockRepository.getSurahList(cancelToken: any(named: 'cancelToken')))
-        .thenAnswer((_) async => surahList);
+    when(
+      () => mockRepository.getSurahList(
+        cancelToken: any(named: 'cancelToken'),
+      ),
+    ).thenAnswer((_) async => surahList);
 
-    // Act: Render widget.
+    /// Act: Render widget.
     await tester.pumpWidget(createWidget());
-    await controller.getSurahList(); // Trigger manual pemuatan data.
-    await tester.pump();
-    await tester.pump(const Duration(seconds: 1)); // Tunggu state update selesai.
 
-    // Assert: Verifikasi elemen UI muncul dengan benar.
+    /// Trigger manual pemuatan data.
+    await controller.getSurahList();
+    await tester.pump();
+
+    /// Tunggu state update selesai.
+    await tester.pump(const Duration(seconds: 1));
+
+    /// Assert: Verifikasi elemen UI muncul dengan benar.
     expect(find.text('Al-Quran'), findsOneWidget);
     expect(find.text('The Opening'), findsOneWidget);
   });

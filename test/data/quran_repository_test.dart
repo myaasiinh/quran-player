@@ -16,16 +16,17 @@ void main() {
   late MockGetStorage mockStorage;
 
   setUp(() {
-    // Mode test GetX untuk menonaktifkan navigasi asli.
+    /// Mode test GetX untuk menonaktifkan navigasi asli.
     Get.testMode = true;
     mockSources = MockQuranSources();
     mockStorage = MockGetStorage();
 
-    // Injeksi dependensi storage mock.
-    Get.put<GetStorage>(mockStorage);
-    Get.put(StorageManager());
+    /// Injeksi dependensi storage mock.
+    Get
+      ..put<GetStorage>(mockStorage)
+      ..put(StorageManager());
 
-    // Stubbing interaksi storage untuk mensimulasikan cache kosong.
+    /// Stubbing interaksi storage untuk mensimulasikan cache kosong.
     when(() => mockStorage.read(any())).thenReturn(null);
     when(() => mockStorage.write(any(), any())).thenAnswer((_) async => {});
     when(() => mockStorage.hasData(any<String>())).thenReturn(false);
@@ -34,30 +35,39 @@ void main() {
   });
 
   tearDown(() {
-    // Reset seluruh state GetX setelah setiap test.
+    /// Reset seluruh state GetX setelah setiap test.
     Get.reset();
   });
 
   group('QuranRepositoryImpl Unit Test', () {
     test('getSurahList returns list of surahs from remote when cache is empty',
         () async {
-      // Arrange: Data surah palsu yang diharapkan dari remote.
+      /// Arrange: Data surah palsu yang diharapkan dari remote.
       final surahList = [
-        SurahModel(number: 1, name: 'Al-Fatiha', englishName: 'The Opening'),
+        SurahModel(
+          number: 1,
+          name: 'Al-Fatiha',
+          englishName: 'The Opening',
+        ),
       ];
-      
-      // Stubbing: Jika memanggil remote, berikan data palsu tersebut.
-      when(() => mockSources.getSurahList(cancelToken: any(named: 'cancelToken')))
-          .thenAnswer((_) async => surahList);
 
-      // Act: Jalankan fungsi yang diuji.
+      /// Stubbing: Jika memanggil remote, berikan data palsu tersebut.
+      when(
+        () => mockSources.getSurahList(
+          cancelToken: any(named: 'cancelToken'),
+        ),
+      ).thenAnswer((_) async => surahList);
+
+      /// Act: Jalankan fungsi yang diuji.
       final result = await repository.getSurahList();
 
-      // Assert: Pastikan hasil sesuai ekspektasi dan remote dipanggil 1 kali.
+      /// Assert: Pastikan hasil sesuai ekspektasi dan remote dipanggil 1 kali.
       expect(result, surahList);
-      verify(() =>
-              mockSources.getSurahList(cancelToken: any(named: 'cancelToken')))
-          .called(1);
+      verify(
+        () => mockSources.getSurahList(
+          cancelToken: any(named: 'cancelToken'),
+        ),
+      ).called(1);
     });
   });
 }

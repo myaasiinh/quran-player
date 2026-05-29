@@ -33,38 +33,44 @@ void main() {
 
   group('SurahListController Unit Test', () {
     test('getSurahList success sets dataList', () async {
-      // Arrange
+      /// Arrange
       final surahList = [
         SurahModel(number: 1, englishName: 'Al-Fatiha'),
       ];
-      when(() => mockRepository.getSurahList(cancelToken: any(named: 'cancelToken')))
-          .thenAnswer((_) async => surahList);
+      when(
+        () => mockRepository.getSurahList(
+          cancelToken: any(named: 'cancelToken'),
+        ),
+      ).thenAnswer((_) async => surahList);
 
-      // Act
+      /// Act
       await controller.getSurahList();
 
-      // Assert
+      /// Assert
       expect(controller.dataList.length, 1);
       expect(controller.dataList.first.englishName, 'Al-Fatiha');
       expect(controller.isSuccess, true);
     });
 
     test('onSearch filters dataList', () async {
-      // Arrange
+      /// Arrange
       final surahList = [
         SurahModel(number: 1, englishName: 'Al-Fatiha'),
         SurahModel(number: 2, englishName: 'Al-Baqara'),
       ];
-      when(() => mockRepository.getSurahList(cancelToken: any(named: 'cancelToken')))
-          .thenAnswer((_) async => surahList);
-      
-      // Muat data awal.
+      when(
+        () => mockRepository.getSurahList(
+          cancelToken: any(named: 'cancelToken'),
+        ),
+      ).thenAnswer((_) async => surahList);
+
+      /// Muat data awal.
       await controller.getSurahList();
 
-      // Act: Cari kata kunci 'Baqara'.
+      /// Act: Cari kata kunci 'Baqara'.
       controller.onSearch('Baqara');
 
-      // Assert: Pastikan hanya ada 1 surah yang cocok.
+      /// Assert: Pastikan hanya ada 1 surah yang cocok.
       expect(controller.dataList.length, 1);
       expect(controller.dataList.first.englishName, 'Al-Baqara');
     });

@@ -13,7 +13,7 @@ class QuranSourcesImpl implements QuranSources {
       url: '/surah',
       cancelToken: cancelToken,
     );
-    
+
     // Parsing manual data JSON ke model objek.
     final List data = response.data['data'] as List;
     return data
@@ -32,7 +32,7 @@ class QuranSourcesImpl implements QuranSources {
       url: '/surah/$surahNumber/$edition',
       cancelToken: cancelToken,
     );
-    
+
     // Mengambil array 'ayahs' dari respon API.
     final List data = response.data['data']['ayahs'] as List;
     return data

@@ -123,7 +123,8 @@ const Map<String, String> id = {
 
   // About Me
   'txt_about_me': 'Tentang Saya',
-  'txt_about_description': 'Aplikasi Al-Quran Audio Player ini dikembangkan sebagai bagian dari technical test. Aplikasi ini menggunakan Clean MVVM Architecture dengan GetX sebagai state management. Fokus utama adalah pada performa tinggi, animasi kustom, dan kualitas kode standar industri.',
+  'txt_about_description':
+      'Aplikasi Al-Quran Audio Player ini dikembangkan sebagai bagian dari technical test. Aplikasi ini menggunakan Clean MVVM Architecture dengan GetX sebagai state management. Fokus utama adalah pada performa tinggi, animasi kustom, dan kualitas kode standar industri.',
   'txt_license': 'Lisensi',
   'txt_app_version': 'Versi Aplikasi',
 };

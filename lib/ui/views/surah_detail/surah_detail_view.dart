@@ -19,7 +19,7 @@ class SurahDetailView extends GetView<SurahDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Memungkinkan body meluas ke bawah AppBar.
+      /// Memungkinkan body meluas ke bawah AppBar.
       extendBodyBehindAppBar: true,
       appBar: SkyAppBar.secondary(
         title:
@@ -28,7 +28,7 @@ class SurahDetailView extends GetView<SurahDetailController> {
         iconColor: Colors.white,
       ),
       body: Container(
-        // Desain background berlapis gradient (OP Design).
+        /// Desain background berlapis gradient (OP Design).
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -49,7 +49,8 @@ class SurahDetailView extends GetView<SurahDetailController> {
             child: Column(
               children: [
                 const SizedBox(height: 100),
-                // Area daftar ayat yang scrollable dengan Auto-Scroll.
+
+                /// Area daftar ayat yang scrollable dengan Auto-Scroll.
                 Expanded(
                   child: ListView.builder(
                     controller: controller.scrollController,
@@ -57,24 +58,32 @@ class SurahDetailView extends GetView<SurahDetailController> {
                     itemCount: controller.dataList.length,
                     itemBuilder: (context, index) {
                       final ayah = controller.dataList[index];
-                      // Komponen reusable AyahItemTile untuk memisahkan concern.
-                      return AyahItemTile(
-                        onTap: () {
-                          // Seek ke posisi ayat tertentu dan mulai putar.
-                          unawaited(
-                            controller.player.seek(Duration.zero, index: index),
-                          );
-                          unawaited(controller.player.play());
-                        },
-                        ayah: ayah,
-                        // Highlight hanya aktif jika audio sedang diputar.
-                        isCurrent: controller.isPlaying.value &&
-                            controller.currentAyahIndex.value == index,
-                      );
+
+                      /// Principal Note: Widget Obx membungkus AyahItemTile
+                      /// untuk memastikan UI reaktif terhadap perubahan index ayat
+                      /// yang sedang aktif secara real-time.
+                      return Obx(() {
+                        final isCurrent = controller.isPlaying.value &&
+                            controller.currentAyahIndex.value == index;
+
+                        return AyahItemTile(
+                          onTap: () {
+                            /// Seek ke posisi ayat tertentu dan mulai putar.
+                            unawaited(
+                              controller.player
+                                  .seek(Duration.zero, index: index),
+                            );
+                            unawaited(controller.player.play());
+                          },
+                          ayah: ayah,
+                          isCurrent: isCurrent,
+                        );
+                      });
                     },
                   ),
                 ),
-                // Panel kontrol audio yang "sticky" di bagian bawah.
+
+                /// Panel kontrol audio yang "sticky" di bagian bawah.
                 PlayerControlPanel(
                   onSeek: controller.seek,
                   onPrevious: controller.previous,

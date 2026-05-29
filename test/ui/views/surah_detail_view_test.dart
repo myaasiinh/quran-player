@@ -21,7 +21,7 @@ class MockAudioSource extends Fake implements AudioSource {}
 /// [SurahDetailViewTest] menguji tampilan detail surah dan kontrol audio.
 void main() {
   setUpAll(() {
-    // Registrasi fallback value untuk objek custom di mocktail.
+    /// Registrasi fallback value untuk objek custom di mocktail.
     registerFallbackValue(MockAudioSource());
   });
 
@@ -35,31 +35,41 @@ void main() {
     mockRepository = MockQuranRepository();
     mockStorage = MockGetStorage();
     mockPlayer = MockAudioPlayer();
-    
+
     Get.put<GetStorage>(mockStorage);
     Get.put(StorageManager());
     Get.put<QuranRepository>(mockRepository);
-    
-    // Stubbing interaksi storage dan audio player.
+
+    /// Stubbing interaksi storage dan audio player.
     when(() => mockStorage.read(any())).thenReturn(null);
     when(() => mockStorage.hasData(any<String>())).thenReturn(false);
-    
-    // Inisialisasi stream audio palsu untuk mencegah error runtime saat testing.
-    when(() => mockPlayer.playerStateStream).thenAnswer((_) => const Stream.empty());
-    when(() => mockPlayer.currentIndexStream).thenAnswer((_) => const Stream.empty());
-    when(() => mockPlayer.positionStream).thenAnswer((_) => const Stream.empty());
-    when(() => mockPlayer.durationStream).thenAnswer((_) => const Stream.empty());
-    when(() => mockPlayer.bufferedPositionStream).thenAnswer((_) => const Stream.empty());
+
+    /// Inisialisasi stream audio palsu untuk mencegah error runtime saat testing.
+    when(() => mockPlayer.playerStateStream)
+        .thenAnswer((_) => const Stream.empty());
+    when(() => mockPlayer.currentIndexStream)
+        .thenAnswer((_) => const Stream.empty());
+    when(() => mockPlayer.positionStream)
+        .thenAnswer((_) => const Stream.empty());
+    when(() => mockPlayer.durationStream)
+        .thenAnswer((_) => const Stream.empty());
+    when(() => mockPlayer.bufferedPositionStream)
+        .thenAnswer((_) => const Stream.empty());
     when(() => mockPlayer.setAudioSource(any())).thenAnswer((_) async => null);
 
-    // Initial stub untuk repository.
-    when(() => mockRepository.getSurahDetail(
-      surahNumber: any(named: 'surahNumber'),
-      edition: any(named: 'edition'),
-      cancelToken: any(named: 'cancelToken'),
-    )).thenAnswer((_) async => []);
+    /// Initial stub untuk repository.
+    when(
+      () => mockRepository.getSurahDetail(
+        surahNumber: any(named: 'surahNumber'),
+        edition: any(named: 'edition'),
+        cancelToken: any(named: 'cancelToken'),
+      ),
+    ).thenAnswer((_) async => []);
 
-    controller = SurahDetailController(repository: mockRepository, player: mockPlayer);
+    controller = SurahDetailController(
+      repository: mockRepository,
+      player: mockPlayer,
+    );
     Get.put(controller);
   });
 
@@ -78,26 +88,38 @@ void main() {
     );
   }
 
-  testWidgets('SurahDetailView should show ayah list and player controls', (WidgetTester tester) async {
-    // Arrange
+  testWidgets('SurahDetailView should show ayah list and player controls',
+      (WidgetTester tester) async {
+    /// Arrange
     final surah = SurahModel(number: 1, englishName: 'Al-Fatiha');
     final ayahList = [
-      AyahModel(number: 1, text: 'Bismillah', numberInSurah: 1, audio: 'https://example.com/1.mp3'),
+      AyahModel(
+        number: 1,
+        text: 'Bismillah',
+        numberInSurah: 1,
+        audio: 'https://example.com/1.mp3',
+      ),
     ];
-    
-    when(() => mockRepository.getSurahDetail(
-      surahNumber: 1,
-      edition: any(named: 'edition'),
-      cancelToken: any(named: 'cancelToken'),
-    )).thenAnswer((_) async => ayahList);
 
-    // Act
+    when(
+      () => mockRepository.getSurahDetail(
+        surahNumber: 1,
+        edition: any(named: 'edition'),
+        cancelToken: any(named: 'cancelToken'),
+      ),
+    ).thenAnswer((_) async => ayahList);
+
+    /// Act
     await tester.pumpWidget(createWidget(surah));
     await controller.getSurahDetail();
-    await tester.pump(); // Start loading
-    await tester.pump(const Duration(seconds: 1)); // Simulate time for loading and animation frames
-    
-    // Assert: Verifikasi konten ayat dan keberadaan tombol play.
+
+    /// Start loading
+    await tester.pump();
+
+    /// Simulate time for loading and animation frames
+    await tester.pump(const Duration(seconds: 1));
+
+    /// Assert: Verifikasi konten ayat dan keberadaan tombol play.
     expect(find.text('Al-Fatiha'), findsOneWidget);
     expect(find.text('Bismillah'), findsOneWidget);
     expect(find.byIcon(Icons.play_arrow), findsOneWidget);

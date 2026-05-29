@@ -18,11 +18,11 @@ class CachedModelConverter<T> implements JsonConverter<T, Object> {
   @override
   T fromJson(Object? json) {
     final data = json! as Map<String, dynamic>;
-    
+
     // Registrasi model Surah untuk konversi balik dari cache.
     if (typeEqualN<T, SurahModel>()) {
       return SurahModel.fromJson(data) as T;
-    } 
+    }
     // Registrasi model Ayah untuk konversi balik dari cache.
     else if (typeEqualN<T, AyahModel>()) {
       return AyahModel.fromJson(data) as T;
@@ -36,7 +36,7 @@ class CachedModelConverter<T> implements JsonConverter<T, Object> {
     // Konversi objek Surah ke Map JSON untuk disimpan ke cache.
     if (typeEqualN<T, SurahModel>()) {
       return (obj as SurahModel).toJson();
-    } 
+    }
     // Konversi objek Ayah ke Map JSON untuk disimpan ke cache.
     else if (typeEqualN<T, AyahModel>()) {
       return (obj as AyahModel).toJson();

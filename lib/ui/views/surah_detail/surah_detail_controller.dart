@@ -19,33 +19,33 @@ class SurahDetailController extends BaseController<AyahModel> {
   final QuranRepository repository;
   final AudioPlayer player;
 
-  // Controller untuk menangani scroll list ayat secara otomatis.
+  /// Controller untuk menangani scroll list ayat secara otomatis.
   final ScrollController scrollController = ScrollController();
 
-  // Data surah yang diterima dari argument navigasi.
+  /// Data surah yang diterima dari argument navigasi.
   final Rxn<SurahModel> surah = Rxn<SurahModel>();
 
-  // State reaktif untuk status pemutaran audio.
+  /// State reaktif untuk status pemutaran audio.
   final RxBool isPlaying = false.obs;
 
-  // State reaktif untuk melacak ayat mana yang sedang diputar.
+  /// State reaktif untuk melacak ayat mana yang sedang diputar.
   final RxInt currentAyahIndex = 0.obs;
 
   @override
   void onInit() {
-    // Mengambil data surah dari argumen navigasi.
+    /// Mengambil data surah dari argumen navigasi.
     surah.value = Get.arguments as SurahModel?;
-    
-    // Principal Note: Listener 'ever' memantau perubahan index ayat yang diputar.
-    // Jika index berubah, trigger fungsi _scrollToCurrentAyah.
+
+    /// Principal Note: Listener 'ever' memantau perubahan index ayat yang diputar.
+    /// Jika index berubah, trigger fungsi _scrollToCurrentAyah.
     ever(currentAyahIndex, (_) => _scrollToCurrentAyah());
-    
+
     super.onInit();
   }
 
   @override
   void onReady() {
-    // Memuat daftar ayat saat view ditampilkan.
+    /// Memuat daftar ayat saat view ditampilkan.
     unawaited(getSurahDetail());
     super.onReady();
   }
@@ -59,7 +59,8 @@ class SurahDetailController extends BaseController<AyahModel> {
         edition: 'ar.alafasy', // Default menggunakan reciter Mishary Alafasy.
       );
       loadFinish(list: res);
-      // Setelah data siap, siapkan playlist audio.
+
+      /// Setelah data siap, siapkan playlist audio.
       unawaited(_setupPlaylist());
     });
   }
@@ -74,18 +75,21 @@ class SurahDetailController extends BaseController<AyahModel> {
           .toList(),
     );
 
-    // Muat playlist ke player secara asinkron.
+    /// Muat playlist ke player secara asinkron.
     await player.setAudioSource(playlist);
 
-    // Pantau status pemutaran (playing/paused) untuk update UI tombol.
+    /// Pantau status pemutaran (playing/paused) untuk update UI tombol.
     player.playerStateStream.listen((state) {
       isPlaying.value = state.playing;
     });
 
-    // Pantau indeks ayat yang sedang aktif untuk highlight di list.
+    /// Pantau indeks ayat yang sedang aktif untuk highlight di list.
+    /// Principal Note: Menggunakan refresh() untuk memastikan GetX mendeteksi
+    /// perubahan index secara real-time dan memaksa UI untuk rebuild.
     player.currentIndexStream.listen((index) {
       if (index != null) {
         currentAyahIndex.value = index;
+        currentAyahIndex.refresh();
       }
     });
   }
@@ -95,7 +99,7 @@ class SurahDetailController extends BaseController<AyahModel> {
   /// untuk memusatkan tampilan pada ayat yang aktif.
   void _scrollToCurrentAyah() {
     if (scrollController.hasClients) {
-      // Estimasi offset: Index * Rata-rata tinggi item.
+      /// Estimasi offset: Index * Rata-rata tinggi item.
       final offset = currentAyahIndex.value * 100.0;
       unawaited(
         scrollController.animateTo(
@@ -122,6 +126,7 @@ class SurahDetailController extends BaseController<AyahModel> {
   }
 
   /// Pindah ke ayat berikutnya jika tersedia.
+  /// Principal Note: Cek hasNext mencegah bug restart playlist di akhir item.
   void next() {
     if (player.hasNext) {
       unawaited(player.seekToNext());
@@ -137,7 +142,7 @@ class SurahDetailController extends BaseController<AyahModel> {
 
   @override
   Future<void> onClose() async {
-    // Melepaskan resource player dan controller scroll.
+    /// Melepaskan resource player dan controller scroll.
     await player.dispose();
     scrollController.dispose();
     await super.onClose();
