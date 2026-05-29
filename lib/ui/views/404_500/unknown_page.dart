@@ -8,7 +8,7 @@ import 'package:quran_player/core/extension/context_extension.dart';
 GetPage<dynamic> get unknownPage {
   return GetPage(
     name: '/unknown',
-    page: () => const UnknownView(),
+    page: UnknownView.new,
   );
 }
 
@@ -34,15 +34,26 @@ class UnknownView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Ikon Kompas / Penunjuk Arah (Spiritual Guidance).
+            /// Ikon Kompas / Penunjuk Arah (Spiritual Guidance).
             Icon(
               Icons.explore_off_rounded,
-              size: 120,
+              size: 100,
               color: context.colorScheme!.primary.withValues(alpha: 0.6),
+            ),
+            const SizedBox(height: 16),
+
+            /// Branding Al-Quran untuk konsistensi di halaman error.
+            Text(
+              'txt_quran_title'.tr,
+              style: context.typography.body2.copyWith(
+                color: context.colorScheme!.primary.withValues(alpha: 0.5),
+                letterSpacing: 2,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 32),
 
-            // Judul Not Found.
+            /// Judul Not Found.
             Text(
               'txt_not_found'.tr,
               textAlign: TextAlign.center,
@@ -53,7 +64,7 @@ class UnknownView extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Kutipan Ayat Al-Quran untuk 404 (QS. Al-Fatihah: 6).
+            /// Kutipan Ayat Al-Quran untuk 404 (QS. Al-Fatihah: 6).
             const Text(
               '"Tunjukkanlah kami jalan yang lurus."',
               textAlign: TextAlign.center,
@@ -65,7 +76,7 @@ class UnknownView extends StatelessWidget {
             ),
             const SizedBox(height: 32),
 
-            // Deskripsi Error (Terlokalisasi).
+            /// Deskripsi Error (Terlokalisasi).
             const Text(
               'Maaf, halaman yang Anda cari tidak tersedia atau telah dipindahkan.',
               textAlign: TextAlign.center,
@@ -73,7 +84,7 @@ class UnknownView extends StatelessWidget {
             ),
             const SizedBox(height: 48),
 
-            // Tombol kembali ke jalan yang benar (Home).
+            /// Tombol kembali ke jalan yang benar (Home).
             ElevatedButton.icon(
               onPressed: () => Get.offAllNamed('/surah-list'),
               icon: const Icon(Icons.home_rounded),

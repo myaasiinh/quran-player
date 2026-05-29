@@ -7,6 +7,7 @@ import 'package:quran_player/core/extension/context_extension.dart';
 /// Principal Note: Menggunakan pendekatan spiritual dengan kutipan Al-Quran untuk
 /// menenangkan pengguna saat menghadapi kesalahan teknis yang tidak terduga.
 class CrashErrorView extends StatelessWidget {
+  /// Memerlukan detail error untuk ditampilkan pada mode debug.
   const CrashErrorView({required this.errorDetails, super.key});
   final FlutterErrorDetails errorDetails;
 
@@ -23,8 +24,19 @@ class CrashErrorView extends StatelessWidget {
             /// Ikon peringatan spiritual (Sabar & Tawakal).
             Icon(
               Icons.sentiment_very_dissatisfied_rounded,
-              size: 100,
+              size: 80,
               color: context.colorScheme!.error.withValues(alpha: 0.5),
+            ),
+            const SizedBox(height: 16),
+
+            /// Branding Al-Quran untuk konsistensi di halaman error.
+            Text(
+              'txt_quran_title'.tr,
+              style: context.typography.body2.copyWith(
+                color: Colors.grey,
+                letterSpacing: 2,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 24),
 

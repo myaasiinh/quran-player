@@ -25,7 +25,7 @@ A premium mobile application for reciting and listening to the Holy Quran, built
 | <img src="screenshots/splash.png" width="200"> | <img src="screenshots/home.png" width="200"> | <img src="screenshots/detail.png" width="200"> | <img src="screenshots/about.png" width="200"> |
 
 ### Demo Video
-[![Watch the Demo](https://img.shields.io/badge/🎥-Watch_App_Demo-blue?style=for-the-badge)](screenshots/demo-app.mp4)
+[![Watch the Demo](https://img.shields.io/badge/🎥-Watch_App_Demo-blue?style=for-the-badge)](screenshots/demo-app-final-compress.mp4)
 
 > *Note: If the video doesn't play directly in your browser, you can download it from the `screenshots/` folder.*
 
