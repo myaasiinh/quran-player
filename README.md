@@ -1,22 +1,53 @@
 # 📖 Al-Quran Audio Player (Absolute Elite Edition)
 
-A premium mobile application for reciting and listening to the Holy Quran, built with Flutter following the **Clean MVVM + GetX** architecture. This project represents the ultimate "Overpowered" (OP) implementation, delivering a production-grade experience with zero technical debt.
+A high-performance, premium mobile application for reciting and listening to the Holy Quran, built with Flutter following the **Clean MVVM + GetX** architecture. This project is a demonstration of industry-standard software engineering, specifically tailored for the technical test at **Transcosmos**.
+
+---
+
+## 🛠️ Tech Stack Used
+A selection of production-grade libraries focused on performance and reliability:
+
+| Category | Technology | Rationale |
+| :--- | :--- | :--- |
+| **Framework** | **Flutter** | Cross-platform high-performance UI. |
+| **State Management** | **GetX** | Reactive UI, unified DI, and simplified routing with minimal boilerplate. |
+| **Networking** | **Dio** | Robust HTTP client with support for interceptors and global config. |
+| **Audio Engine** | **Just Audio** | Low-latency audio playback with playlist and streaming support. |
+| **Local Storage** | **GetStorage** | Fast, key-value storage for local caching and user preferences. |
+| **UI Documentation**| **Device Preview** | Responsiveness verification across multiple device screen sizes. |
+| **Testing** | **Mocktail** | Type-safe mocking for high-reliability automated tests. |
+
+---
+
+## 📐 Architectural Decision Records (ADR)
+Professional engineering involves making deliberate choices. Below is the rationale for the core architecture of this app:
+
+### 1. Decision: Clean MVVM + Repository Pattern
+- **Rationale**: Strict separation of concerns. The View is strictly presentational, the Controller (ViewModel) manages reactive state, and the Repository orchestrates data (local cache vs. remote API).
+- **Benefit**: Ensures high testability and maintainability for future feature expansion.
+
+### 2. Decision: Reactive UI Sync for Verse Highlighting
+- **Rationale**: Used GetX `Obx` and `ever` listeners to ensure the active verse highlight and auto-scroll move instantly with the audio engine.
+- **Benefit**: Zero-lag feedback for the user, providing a "premium" app feel.
+
+### 3. Decision: Local-First Caching Strategy
+- **Rationale**: Every surah and ayah list is cached using `GetStorage`.
+- **Benefit**: Instant load times on second visit and app stability during poor network conditions.
+
+### 4. Decision: Custom Drawing (Painter) over Lottie/Assets
+- **Rationale**: Mathematical generation of the Splash Mandala and Audio Visualizer using `CustomPainter`.
+- **Benefit**: High performance, extremely small app size (no large asset files), and demonstration of low-level rendering mastery.
+
+---
 
 ## ✨ "OP" UI/UX Highlights
-- **Mandala Custom Animation**: A mathematically generated, rotating mandala backdrop on the splash screen using `CustomPaint`, symbolizing spiritual harmony.
-- **Dynamic Audio Visualizer**: Real-time sound wave simulation using Sine algorithms, reactive to playback status for an immersive listening experience.
-- **Auto-Scroll & Smart Highlighting**: The verse list automatically scrolls to and highlights the currently playing ayah in real-time, perfectly synced with the audio engine.
-- **Spiritual Error UX**: Custom-designed 404 (Not Found) and 500 (Crash) pages featuring Quranic references (QS. Al-Fatihah: 6 & QS. Al-Baqarah: 286) with prominent "Al-Quran" branding to guide and calm users during system failures.
-- **Premium Design System**: A colorful yet sophisticated palette with elegant gradients, translucent "Glassmorphism" cards, and high-quality typography.
-- **Zero-Hardcode Policy**: 100% of UI strings are localized using GetX translations (`.tr`) for seamless Indonesian and English support.
+- **Mandala Custom Animation**:Rotating mandala backdrop on the splash screen using mathematically generated geometry.
+- **Dynamic Audio Visualizer**: Real-time sound wave simulation reactive to playback status.
+- **Auto-Scroll & Smart Highlighting**: Verse list automatically scrolls to and highlights the currently playing ayah.
+- **Spiritual Error UX**: Redesigned 404/500 pages with Quranic references to calm users during errors.
+- **Glassmorphism Design**: Elegant layering with premium gradients and translucent cards.
 
-## 🚀 Core Features
-- **Surah Discovery**: EXPLORE 114 Surahs with metadata (Revelation type, Ayah count).
-- **Elite Search**: Real-time filtering with instant response and multi-language support.
-- **Continuous Ayah Playback**: Seamless audio streaming per verse using the high-performance `just_audio` engine.
-- **Integrated Player Control**: Play, Pause, Next, Previous, and Seeking via a custom-styled, interactive progress bar.
-- **Intelligent Offline Caching**: Repository-level caching using `GetStorage` ensures the app is always fast and available, even without internet.
-- **About Developer**: Dedicated profile page showcasing the author and project license.
+---
 
 ## 📱 Visual Documentation
 ### Screenshots
@@ -25,30 +56,25 @@ A premium mobile application for reciting and listening to the Holy Quran, built
 | <img src="screenshots/splash.png" width="200"> | <img src="screenshots/home.png" width="200"> | <img src="screenshots/detail.png" width="200"> | <img src="screenshots/about.png" width="200"> |
 
 ### Demo Video
-https://github.com/user-attachments/assets/c331189e-9010-4e2f-8562-b511eef768bf
+👉 **[Watch App Demo on GitHub](https://github.com/user-attachments/assets/c331189e-9010-4e2f-8562-b511eef768bf)**
 
-> *Note: Klik link di atas untuk memutar video demo aplikasi secara langsung.*
+---
 
 ## 📥 Download Release APK
-The latest production-ready APK is available at the root of this repository:
-👉 **[quran.apk](./quran.apk)**
+👉 **[quran.apk](./quran.apk)** *(Includes internet permission for real device testing)*
 
-## 🛠️ Engineering Excellence (Principal/Staff Level)
-- **Zero-Lint Architecture**: Lulus audit `flutter analyze` dengan **0 Error, 0 Warning, dan 0 Info**.
-- **Clean MVVM**: Strict decoupling between Model, View, Controller, and Repository layers.
-- **Full Async Safety**: All futures are properly managed with `await` or `unawaited()` to prevent race conditions.
-- **Exhaustive Documentation**: Setiap file dilengkapi dokumentasi baris-demi-baris dalam Bahasa Indonesia menjelaskan rationale arsitektural.
-- **Atomic Widgets**: UI components are broken down into small, reusable, and testable units.
+---
 
-## 🧪 Testing Suite (100% Verified)
-Aplikasi ini telah divalidasi dengan 6 pengujian otomatis yang mencakup Unit Test (Controller & Repository) serta Widget Test (UI).
+## 🧪 Quality Assurance (100% Verified)
+Aplikasi ini telah divalidasi dengan **6 pengujian otomatis** yang mencakup Unit Test dan Widget Test.
 
 ![Test Results](screenshots/testing-sukses-unit-ui.png)
 
-### 💡 Android Studio Test History Persistence
-Untuk memastikan riwayat testing tersimpan dan dapat dilihat kembali di Android Studio:
-1. **Gunakan Run Configuration**: Selalu jalankan tes melalui menu **Run > All Tests** (sudah saya sertakan di folder `.idea/runConfigurations`).
-2. **Tab Test History**: Klik ikon jam (clock) di toolbar tab **Run** untuk membuka "Recent Tests".
+- **Zero-Lint Architecture**: Lulus audit `flutter analyze` dengan **0 Error, 0 Warning, dan 0 Info**.
+- **Full Async Safety**: All futures properly managed with `await` or `unawaited()`.
+- **Exhaustive Documentation**: Every file features line-by-line Indonesian documentation.
+
+---
 
 ## 📦 Installation & Setup
 ```bash
@@ -59,5 +85,5 @@ flutter run
 ```
 
 ---
-**Developed by:** Muhammad Yaasiin Hidayatulloh (Staff Software Architect Mode)  
-**Status:** 👑 **ULTIMATE EDITION - PRODUCTION READY & HARDENED**
+**Developed by:** Muhammad Yaasiin Hidayatulloh (Staff Software Architect)  
+**Status:** 👑 **ULTIMATE EDITION - PRODUCTION READY**
