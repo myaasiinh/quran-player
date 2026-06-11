@@ -10,11 +10,18 @@ import '/core/database/storage/storage_manager.dart';
 import '/core/extension/string_extension.dart';
 import '/data/sources/local/cached_model_converter.dart';
 
+/// Mixin yang menyediakan fungsi-fungsi dasar untuk mengelola cache data.
+/// Memudahkan penyimpanan, pengambilan, dan penghapusan data cache
+/// dengan dukungan JSON encoding/decoding.
 mixin CacheMixin {
+  /// Tag logging untuk kelas ini.
   final String _tag = 'CacheMixin::->';
 
+  /// Instance dari [StorageManager] yang digunakan untuk mengakses penyimpanan.
   StorageManager storage = StorageManager.find;
 
+  /// Mengambil daftar objek bertipe [T] dari cache berdasarkan [key].
+  /// Mengembalikan list kosong jika cache tidak ditemukan atau kosong.
   Future<List<T>> getCachedList<T>({required String key}) async {
     log('get cached, key: $key');
 
@@ -34,6 +41,7 @@ mixin CacheMixin {
     }
   }
 
+  /// Menyimpan daftar objek bertipe [T] ke dalam cache menggunakan [key].
   Future<void> saveCachedList<T>({
     required String key,
     required List<T> list,
@@ -45,6 +53,8 @@ mixin CacheMixin {
     );
   }
 
+  /// Mengambil objek tunggal bertipe [T] dari cache berdasarkan [key].
+  /// Akan memvalidasi apakah id dari cache sama dengan [cachedId] atau [customFieldId].
   Future<T?> getCacheObject<T>({
     required String key,
     required String? cachedId,
@@ -66,11 +76,13 @@ mixin CacheMixin {
     return null;
   }
 
+  /// Mengambil nilai ID dari sebuah map [cache], atau menggunakan [customFieldId] jika tersedia.
   String _getId({required Map<String, dynamic> cache, String? customFieldId}) {
     if (customFieldId != null) return customFieldId;
     return cache['id'].toString();
   }
 
+  /// Menyimpan sebuah objek tunggal ke dalam cache dengan [key] tertentu.
   Future<void> saveCachedObject<T>({
     required String key,
     required T data,
@@ -81,10 +93,12 @@ mixin CacheMixin {
     );
   }
 
+  /// Menghapus data cache yang terkait dengan [key] tertentu.
   Future<void> deleteCached(String key) async {
     await storage.delete(key);
   }
 
+  /// Melakukan logging terkait informasi data cache, seperti waktu kadaluarsa.
   void _logging(CacheData cacheData, String key) {
     log('$_tag get cache $key');
     log('$_tag expiry: ${cacheData.expiredDate}');

@@ -1,4 +1,4 @@
-/* Created by
+/* Dibuat oleh
    30/01/2024
    myaasiinh@gmail.com
 */
@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
+/// Widget [PagedGroupedListView] menampilkan daftar item yang dikelompokkan (grouped)
+/// dan mendukung fitur pagination (memuat data per halaman) menggunakan infinite_scroll_pagination.
+/// Widget ini menggunakan arsitektur BoxScrollView sehingga bertindak seperti ListView biasa.
 class PagedGroupedListView<PageKeyType, T, G> extends BoxScrollView {
   const PagedGroupedListView({
     required this.pagingController,
@@ -37,20 +40,42 @@ class PagedGroupedListView<PageKeyType, T, G> extends BoxScrollView {
     super.clipBehavior,
   });
 
+  /// Controller yang mengelola state dari pagination.
   final PagingController<PageKeyType, T> pagingController;
+  
+  /// Delegate untuk membuat widget setiap item dari list.
   final PagedChildBuilderDelegate<T> builderDelegate;
+  
+  /// Menentukan apakah indikator halaman pertama harus di-shrinkWrap atau tidak.
   final bool shrinkWrapFirstPageIndicators;
+  
+  /// Fungsi builder untuk membuat widget header dari setiap kelompok (grup).
   final Widget Function(G element) groupHeaderBuilder;
+  
+  /// Fungsi builder opsional untuk membuat widget footer dari setiap kelompok (grup).
   final Widget Function(G element)? groupFooterBuilder;
+  
+  /// Fungsi untuk menentukan dasar pengelompokan dari sebuah elemen item.
   final G Function(T element) groupBy;
+  
+  /// Widget pemisah (separator) antar item dalam satu grup.
   final Widget? separator;
+  
+  /// Widget pemisah (separator) antara header grup dan item pertamanya.
   final Widget? separatorHeader;
+  
+  /// Urutan penyortiran grup (asc/desc).
   final SortBy sortGroupBy;
+  
+  /// Fungsi komparator opsional untuk menyortir item-item di dalam setiap grup.
   final int Function(T, T)? sortGroupItems;
+  
+  /// Builder opsional untuk membuat widget pemisah antar grup.
   final NullableIndexedWidgetBuilder? separatorGroup;
 
   @override
   Widget buildChildLayout(BuildContext context) {
+    // Membangun sliver layout dari list grup yang dipaginasi
     return PagedSliverGroupedListView(
       pagingController: pagingController,
       builderDelegate: builderDelegate,
@@ -67,6 +92,8 @@ class PagedGroupedListView<PageKeyType, T, G> extends BoxScrollView {
   }
 }
 
+/// Widget [PagedSliverGroupedListView] adalah versi Sliver dari [PagedGroupedListView]
+/// yang digunakan untuk menempatkan daftar kelompok berpaginasi di dalam CustomScrollView.
 class PagedSliverGroupedListView<PageKeyType, T, G> extends StatelessWidget {
   const PagedSliverGroupedListView({
     required this.pagingController,
@@ -83,16 +110,37 @@ class PagedSliverGroupedListView<PageKeyType, T, G> extends StatelessWidget {
     this.separatorGroup,
   });
 
+  /// Controller yang mengelola state dari pagination.
   final PagingController<PageKeyType, T> pagingController;
+  
+  /// Delegate untuk membuat widget setiap item dari list.
   final PagedChildBuilderDelegate<T> builderDelegate;
+  
+  /// Menentukan apakah indikator halaman pertama harus di-shrinkWrap atau tidak.
   final bool shrinkWrapFirstPageIndicators;
+  
+  /// Fungsi builder untuk membuat widget header dari setiap kelompok (grup).
   final Widget Function(G element) groupHeaderBuilder;
+  
+  /// Fungsi builder opsional untuk membuat widget footer dari setiap kelompok (grup).
   final Widget Function(G element)? groupFooterBuilder;
+  
+  /// Fungsi untuk menentukan dasar pengelompokan dari sebuah elemen item.
   final G Function(T element) groupBy;
+  
+  /// Widget pemisah (separator) antar item dalam satu grup.
   final Widget? separator;
+  
+  /// Widget pemisah (separator) antara header grup dan item pertamanya.
   final Widget? separatorHeader;
+  
+  /// Builder opsional untuk membuat widget pemisah antar grup.
   final NullableIndexedWidgetBuilder? separatorGroup;
+  
+  /// Urutan penyortiran grup (asc/desc).
   final SortBy sortGroupBy;
+  
+  /// Fungsi komparator opsional untuk menyortir item-item di dalam setiap grup.
   final int Function(T, T)? sortGroupItems;
 
   @override
@@ -100,6 +148,8 @@ class PagedSliverGroupedListView<PageKeyType, T, G> extends StatelessWidget {
     return PagingListener(
       controller: pagingController,
       builder: (context, state, fetchNextPage) {
+        
+        // Fungsi helper untuk membangun layout MultiSliver yang berisi daftar grup dan indikator status
         Widget buildLayout(
           IndexedWidgetBuilder itemBuilder,
           int itemCount, {
@@ -131,6 +181,8 @@ class PagedSliverGroupedListView<PageKeyType, T, G> extends StatelessWidget {
           fetchNextPage: fetchNextPage,
           builderDelegate: builderDelegate,
           shrinkWrapFirstPageIndicators: shrinkWrapFirstPageIndicators,
+          
+          // Layout ketika daftar telah selesai dimuat seluruhnya
           completedListingBuilder: (
             context,
             itemBuilder,
@@ -142,6 +194,8 @@ class PagedSliverGroupedListView<PageKeyType, T, G> extends StatelessWidget {
             itemCount,
             statusIndicatorBuilder: noMoreItemsIndicatorBuilder,
           ),
+          
+          // Layout ketika sedang memuat daftar baru
           loadingListingBuilder:
               (context, itemBuilder, itemCount, progressIndicatorBuilder) =>
                   buildLayout(
@@ -149,6 +203,8 @@ class PagedSliverGroupedListView<PageKeyType, T, G> extends StatelessWidget {
             itemCount,
             statusIndicatorBuilder: progressIndicatorBuilder,
           ),
+          
+          // Layout ketika terjadi error saat memuat daftar
           errorListingBuilder:
               (context, itemBuilder, itemCount, errorIndicatorBuilder) =>
                   buildLayout(

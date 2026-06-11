@@ -1,4 +1,6 @@
+/// Model data untuk merepresentasikan sebuah ayat dalam Al-Quran.
 class AyahModel {
+  /// Konstruktor untuk membuat instance dari [AyahModel].
   AyahModel({
     this.number,
     this.text,
@@ -13,6 +15,7 @@ class AyahModel {
     this.audioSecondary,
   });
 
+  /// Membuat instance [AyahModel] dari format JSON.
   factory AyahModel.fromJson(Map<String, dynamic> json) {
     return AyahModel(
       number: json['number'] as int?,
@@ -30,18 +33,41 @@ class AyahModel {
           .toList(),
     );
   }
+
+  /// Nomor urut ayat secara keseluruhan dalam Al-Quran.
   final int? number;
+
+  /// Teks bahasa Arab dari ayat.
   final String? text;
+
+  /// Nomor urut ayat di dalam surah.
   final int? numberInSurah;
+
+  /// Juz tempat ayat ini berada.
   final int? juz;
+
+  /// Manzil tempat ayat ini berada.
   final int? manzil;
+
+  /// Halaman tempat ayat ini berada dalam mushaf.
   final int? page;
+
+  /// Ruku tempat ayat ini berada.
   final int? ruku;
+
+  /// Hizb quarter tempat ayat ini berada.
   final int? hizbQuarter;
+
+  /// Informasi sajadah (bisa berupa boolean atau objek).
   final dynamic sajda;
+
+  /// URL audio utama untuk ayat ini.
   final String? audio;
+
+  /// Daftar URL audio alternatif untuk ayat ini.
   final List<String>? audioSecondary;
 
+  /// Mengonversi instance [AyahModel] menjadi bentuk map/JSON.
   Map<String, dynamic> toJson() {
     return {
       'number': number,

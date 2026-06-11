@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
+/// Kelas pembantu (helper) untuk menampilkan berbagai jenis Bottom Sheet.
+/// Menggunakan package `modal_bottom_sheet` dan utilitas dari `get`.
 class BottomSheetHelper {
+  /// Menampilkan Bottom Sheet dasar/standar bawaan Material.
+  /// 
+  /// [child] adalah widget konten yang akan ditampilkan.
+  /// Parameter lain dapat diatur untuk mengonfigurasi properti Bottom Sheet seperti dismissible, warna, dsb.
   static Future<T?> basic<T>({
     required Widget child,
     bool isDismissible = true,
@@ -21,6 +27,7 @@ class BottomSheetHelper {
       builder: (btmContext) => ColoredBox(
         color: Theme.of(Get.context!).scaffoldBackgroundColor,
         child: ConstrainedBox(
+          // Membatasi tinggi maksimum Bottom Sheet agar tidak melebihi ukuran layar
           constraints: BoxConstraints(maxHeight: Get.height - 50),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
@@ -31,6 +38,7 @@ class BottomSheetHelper {
     );
   }
 
+  /// Menampilkan Bottom Sheet dengan sudut atas yang melengkung (rounded).
   static Future<T?> rounded<T>({
     required Widget child,
     bool isDismissible = true,
@@ -54,6 +62,7 @@ class BottomSheetHelper {
           child: Container(
             decoration: BoxDecoration(
               color: Theme.of(Get.context!).scaffoldBackgroundColor,
+              // Memberikan lengkungan (radius) pada sudut kiri atas dan kanan atas
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(24),
                 topRight: Radius.circular(24),
@@ -69,6 +78,8 @@ class BottomSheetHelper {
     );
   }
 
+  /// Menampilkan Bottom Sheet bergaya Bar.
+  /// Sering digunakan untuk tampilan yang menempel pada batas atas.
   static Future<T?> bar<T>({
     required Widget child,
     bool isDismissible = true,
@@ -90,6 +101,8 @@ class BottomSheetHelper {
     );
   }
 
+  /// Menampilkan Bottom Sheet bergaya Cupertino (iOS style).
+  /// Memiliki indikator tarikan (drag indicator) kecil di bagian atas.
   static Future<T?> cupertino<T>({
     required Widget child,
     bool isDismissible = true,
@@ -114,6 +127,7 @@ class BottomSheetHelper {
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
+              // Indikator drag (garis horizontal di tengah atas)
               Positioned(
                 top: 0,
                 child: Container(
@@ -137,6 +151,7 @@ class BottomSheetHelper {
     );
   }
 
+  /// Menampilkan Modal Bottom Sheet Material yang disesuaikan dari package.
   static Future<T?> material<T>({
     required Widget child,
     bool isDismissible = true,

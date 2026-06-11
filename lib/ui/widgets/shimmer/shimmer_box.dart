@@ -2,6 +2,8 @@ import '/ui/widgets/sky_box.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+/// Widget [ShimmerBox] digunakan untuk menampilkan efek loading (shimmer)
+/// berbentuk kotak persegi (box).
 class ShimmerBox extends StatelessWidget {
   const ShimmerBox({
     super.key,
@@ -12,10 +14,19 @@ class ShimmerBox extends StatelessWidget {
     this.baseColor,
   });
 
+  /// Tinggi dari kotak shimmer.
   final double? height;
+  
+  /// Lebar dari kotak shimmer.
   final double? width;
+  
+  /// Radius sudut (lengkungan) dari kotak shimmer. Defaultnya adalah 6.
   final double? borderRadius;
+  
+  /// Margin (jarak luar) di sekitar kotak shimmer.
   final EdgeInsets? margin;
+  
+  /// Warna dasar dari efek shimmer. Jika tidak diisi, akan menggunakan warna abu-abu.
   final Color? baseColor;
 
   @override

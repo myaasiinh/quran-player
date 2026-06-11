@@ -7,22 +7,39 @@ import '/config/themes/generated/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// Kelas [AppTheme] menyediakan pengaturan tema utama (cahaya dan gelap)
+/// yang digunakan secara menyeluruh di dalam aplikasi.
 class AppTheme {
+  /// Mengembalikan konfigurasi [ThemeData] yang digunakan untuk mode terang (Light Mode).
   static ThemeData get light {
     return ThemeData(
+      // Mengatur palet dasar skema warna dari warna utama aplikasi.
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.primary,
         surfaceTint: Colors.white,
       ),
+      // Menerapkan font Poppins pada tema keseluruhan aplikasi.
       fontFamily: FontFamily.poppins,
+      
+      // Pengaturan khusus visual elemen input atau form.
       inputDecorationTheme: inputDecorationTheme(),
+      
+      // Pengaturan desain standar elemen checkbox.
       checkboxTheme: checkboxThemeData(),
+      
+      // Pengaturan desain standar elemen opsi radio.
       radioTheme: radioThemeData(),
+      
+      // Pengaturan desain standar elemen switch (toggle).
       switchTheme: switchThemeData(),
+      
+      // Desain standar panel navigasi bagian bawah layar.
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: AppColors.primary,
         unselectedItemColor: Colors.grey,
       ),
+      
+      // Desain bilah aplikasi (AppBar) dibagian atas layar.
       appBarTheme: const AppBarTheme(
         surfaceTintColor: Colors.transparent,
         systemOverlayStyle: SystemUiOverlayStyle(
@@ -31,7 +48,11 @@ class AppTheme {
           statusBarColor: AppColors.primary,
         ),
       ),
+      
+      // Desain pemisah antar tab menggunakan warna sekunder.
       tabBarTheme: const TabBarThemeData(indicatorColor: AppColors.secondary),
+      
+      // Deklarasi tipografi default berisikan aturan bentuk dan model teks dasar.
       textTheme: TextTheme(
         displayLarge: DefaultTypography.displayLarge,
         displayMedium: DefaultTypography.displayMedium,
@@ -43,6 +64,8 @@ class AppTheme {
         labelMedium: DefaultTypography.labelMedium,
         labelSmall: DefaultTypography.labelSmall,
       ),
+      
+      // Implementasi font yang diekstensi lewat [AppTypography].
       extensions: const [
         AppTypography(
           headline1: TextStyle(
@@ -84,8 +107,10 @@ class AppTheme {
     );
   }
 
+  /// Mengembalikan konfigurasi [ThemeData] yang digunakan untuk mode gelap (Dark Mode).
   static ThemeData get dark {
     return ThemeData(
+      // Mengatur palet dasar skema warna dari warna utama aplikasi versi mode gelap.
       colorScheme: ColorScheme.fromSeed(
         seedColor: AppColors.primary,
         surfaceTint: Colors.transparent,
@@ -96,6 +121,8 @@ class AppTheme {
       checkboxTheme: checkboxThemeData(),
       radioTheme: radioThemeData(),
       switchTheme: switchThemeData(),
+      
+      // Memoles gaya dari lembar bawah yang mengapung (bottom sheet).
       bottomSheetTheme: const BottomSheetThemeData(
         elevation: 8,
         shape: RoundedRectangleBorder(
@@ -105,11 +132,15 @@ class AppTheme {
           ),
         ),
       ),
+      
+      // Tema panel navigasi bawah dengan memoles gaya sedikit pada bayangan elemen.
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: AppColors.primary,
         unselectedItemColor: Colors.grey,
         elevation: 2,
       ),
+      
+      // Adaptasi system overlay dari bilah aplikasi (AppBar).
       appBarTheme: AppBarTheme(
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Platform.isIOS || Platform.isMacOS
@@ -172,6 +203,7 @@ class AppTheme {
     );
   }
 
+  /// Membuat visual konfigurasi [CheckboxThemeData] untuk komponen Checkbox.
   static CheckboxThemeData checkboxThemeData() {
     return CheckboxThemeData(
       shape: const RoundedRectangleBorder(
@@ -190,6 +222,7 @@ class AppTheme {
     );
   }
 
+  /// Membuat visual konfigurasi [RadioThemeData] untuk komponen RadioButton.
   static RadioThemeData radioThemeData() {
     return RadioThemeData(
       fillColor: WidgetStateProperty.resolveWith<Color?>((
@@ -206,6 +239,7 @@ class AppTheme {
     );
   }
 
+  /// Membuat visual konfigurasi [SwitchThemeData] untuk komponen Toggle / Switch.
   static SwitchThemeData switchThemeData() {
     return SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith<Color?>((
@@ -233,6 +267,7 @@ class AppTheme {
     );
   }
 
+  /// Membuat visual konfigurasi [InputDecorationTheme] untuk kolom / area input teks dari pengguna.
   static InputDecorationTheme inputDecorationTheme() {
     return InputDecorationTheme(
       border: OutlineInputBorder(

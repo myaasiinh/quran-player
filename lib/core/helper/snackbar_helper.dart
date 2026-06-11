@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+/// Jenis atau tipe dari SnackBar yang akan ditampilkan.
 enum SkySnackBarType { NORMAL, SUCCESS, ERROR, WARNING }
 
+/// Kelas helper untuk mempermudah pemanggilan SnackBar menggunakan ScaffoldMessenger.
 abstract class SnackBarHelper {
+  /// Menampilkan SnackBar dengan pengaturan yang sepenuhnya kustom (Custom).
   static void custom({
     required String? message,
     SnackBarBehavior? behavior,
@@ -28,6 +31,7 @@ abstract class SnackBarHelper {
     );
   }
 
+  /// Menampilkan SnackBar dengan tipe normal (tanpa indikator warna khusus).
   static void normal({
     required String? message,
     SnackBarBehavior? behavior,
@@ -40,6 +44,8 @@ abstract class SnackBarHelper {
     );
   }
 
+  /// Menampilkan SnackBar untuk status berhasil (Success).
+  /// Latar belakang umumnya berwarna hijau.
   static void success({
     required String? message,
     SnackBarBehavior? behavior,
@@ -53,6 +59,8 @@ abstract class SnackBarHelper {
     );
   }
 
+  /// Menampilkan SnackBar untuk status gagal atau error (Error).
+  /// Latar belakang umumnya berwarna merah.
   static void error({
     required String? message,
     SnackBarBehavior? behavior,
@@ -66,6 +74,8 @@ abstract class SnackBarHelper {
     );
   }
 
+  /// Menampilkan SnackBar untuk status peringatan (Warning).
+  /// Latar belakang umumnya berwarna oranye.
   static void warning({
     required String? message,
     SnackBarBehavior? behavior,
@@ -79,6 +89,8 @@ abstract class SnackBarHelper {
     );
   }
 
+  /// Fungsi utama (internal) untuk membuat dan menampilkan SnackBar.
+  /// Berfungsi mengatur properti visual (warna, margin, dsb) berdasarkan tipe yang diberikan.
   static void showDefaultSnackBar({
     required String message,
     SkySnackBarType type = SkySnackBarType.NORMAL,
@@ -91,7 +103,10 @@ abstract class SnackBarHelper {
     ShapeBorder? shape,
     double? elevation,
   }) {
+    // Menentukan warna dasar jika backgroundColor tidak diberikan
     var bgColor = backgroundColor ?? Theme.of(Get.context!).primaryColor;
+    
+    // Menyesuaikan warna sesuai dengan tipe (enum) SnackBar
     bgColor = switch (type) {
       SkySnackBarType.ERROR => bgColor = Colors.red,
       SkySnackBarType.SUCCESS => bgColor = Colors.green,
@@ -107,9 +122,12 @@ abstract class SnackBarHelper {
       margin: margin,
       padding: padding,
       content: Text(message, style: const TextStyle(color: Colors.white)),
+      // Default menggunakan tipe floating agar terlihat melayang dari bawah
       behavior: behavior ?? SnackBarBehavior.floating,
       backgroundColor: bgColor,
     );
+
+    // Sembunyikan SnackBar yang sedang aktif (jika ada) dan tampilkan yang baru
     ScaffoldMessenger.of(Get.context!)
       ..hideCurrentSnackBar()
       ..showSnackBar(snackBar);
