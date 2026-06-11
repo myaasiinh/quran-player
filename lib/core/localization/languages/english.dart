@@ -1,5 +1,8 @@
+/// File ini menyimpan Map konstan [en] (kependekan dari bahasa Inggris/English).
+/// Digunakan oleh package `GetX` untuk melokalisasi (menterjemahkan) antarmuka dan 
+/// label pada seluruh sistem aplikasi.
 const Map<String, String> en = {
-  // Permission
+  // Permission (Perizinan)
   'txt_permission_warning': 'Need Permission',
   'txt_need_permission_storage': 'This app need your storage permission',
   'txt_need_permission_camera': 'This app need your camera permission',
@@ -8,12 +11,12 @@ const Map<String, String> en = {
   'txt_open_setting': 'Open Setting',
   'txt_need_several_permission': 'This app need your several permission',
 
-  // Main Nav
+  // Main Nav (Navigasi Utama Layar)
   'txt_users': 'Users',
   'txt_utility': 'Utility',
   'txt_profile': 'Profile',
 
-  // Network
+  // Network (Status dan Error Jaringan)
   'txt_connection_timeout': 'Connection Timeout',
   'txt_internal_server_error': 'Sorry, internal server error',
   'txt_request_entity_to_large': 'Request Entity Too Large',
@@ -28,11 +31,12 @@ const Map<String, String> en = {
   'txt_unexpected_error': 'Unexpected Error!',
   'txt_unable_to_process': 'Unable to process',
   'txt_something_went_wrong': 'Something went wrong!',
-  // Api Translation
+  
+  // Api Translation (Terjemahan Respon API)
   'txt_api_user_not_found':
-      'Pengguna tidak ditemukan. \nSilahkan melakukan pendaftaran terlebih dahulu.',
+      'Pengguna tidak ditemukan. \nSilahkan melakukan pendaftaran terlebih dahulu.', // Note: ini di source asli berbahasa Indonesia, dipertahankan sesuai aslinya.
 
-  // Date Time
+  // Date Time (Format Waktu & Tanggal)
   'txt_expired': 'Expired',
   'txt_days': 'days',
   'txt_minutes': 'minutes',
@@ -49,7 +53,7 @@ const Map<String, String> en = {
   'txt_friday': 'Friday',
   'txt_saturday': 'Saturday',
 
-  // General
+  // General (Teks Universal)
   'txt_version': 'App Version',
   'txt_media_unsupported': 'Media Unsupported',
   'txt_setting': 'Settings',
@@ -101,7 +105,7 @@ const Map<String, String> en = {
   'txt_no_following': 'You are not following anyone',
   'txt_no_repository': 'You dont have any repositories',
 
-  /// Validation
+  /// Validation (Peringatan & Validasi Formulir)
   'txt_failed': 'Failed',
   'txt_success': 'Success',
   'txt_warning': 'Warning',
@@ -116,7 +120,7 @@ const Map<String, String> en = {
   'txt_valid_email': 'Please enter a valid email',
   'txt_valid_phone': 'Please enter a valid phone number.',
 
-  // Quran Player
+  // Quran Player (Terjemahan Spesifik Fitur Al-Quran)
   'txt_quran_title': 'Al-Quran',
   'txt_search_surah_hint': 'Search Surah...',
   'txt_surah_detail_title': 'Surah Detail',
@@ -124,7 +128,7 @@ const Map<String, String> en = {
   'txt_medinan': 'Medinan',
   'txt_ayahs': 'Ayahs',
 
-  // About Me
+  // About Me (Tentang Aplikasi/Developer)
   'txt_about_me': 'About Me',
   'txt_about_description':
       'This Al-Quran Audio Player application was developed as part of a technical test. It uses Clean MVVM Architecture with GetX for state management. The main focus is on high performance, custom animations, and industry-standard code quality.',

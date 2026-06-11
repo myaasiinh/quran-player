@@ -7,10 +7,11 @@ import 'package:get/get.dart';
    myaasiinh@gmail.com
 */
 
-/// Widget yang digunakan untuk menampilkan status "Kosong" (Empty State),
-/// biasanya digunakan saat data list kosong atau tidak ada hasil pencarian.
+/// Komponen Widget visual yang didedikasikan untuk merepresentasikan status antarmuka "Kosong" (Empty State).
+/// Utamanya disematkan secara dinamis saat muatan daftar array (data list) tiada isi, 
+/// ataupun sesudah memproses operasi kueri pencarian yang membuahkan hasil nihil.
 class EmptyView extends StatelessWidget {
-  /// Konstruktor untuk widget [EmptyView].
+  /// Parameter inisialisasi awal konstruktor bagi komponen layout [EmptyView].
   const EmptyView({
     super.key,
     this.emptyImage,
@@ -30,95 +31,126 @@ class EmptyView extends StatelessWidget {
     this.emptyRetryEnabled = false,
   });
 
-  /// Widget gambar kustom yang akan ditampilkan. Jika null, akan menggunakan gambar dari [emptyImage].
+  /// Widget ilustrasi gambar kustom yang diperkenankan dioverride dan diselipkan ke tengah.
+  /// Jika variabel dibiarkan (null), sistem merujuk dan mengekstrak gambar cadangan default di dalam parameter [emptyImage].
   final Widget? emptyImageWidget;
 
-  /// Path aset gambar yang akan ditampilkan jika konten kosong.
+  /// Target jalur rute / alamat lokasi aset (path string) ilustrasi untuk dipasang di situasi nihil data.
   final String? emptyImage;
 
-  /// Teks judul untuk kondisi kosong.
+  /// Blok kalimat penegasan (headline teks) pemberi tahu akan ketiadaan informasi spesifik.
   final String? emptyTitle;
 
-  /// Teks subjudul atau deskripsi untuk kondisi kosong.
+  /// Kalimat deskripsi pelengkap (subjudul pendukung) demi menjabarkan instruksi kepada user ketika kosong.
   final String? emptySubtitle;
 
-  /// Fisika scroll yang diaplikasikan pada [SingleChildScrollView].
+  /// Referensi pengatur sifat dan gaya interaksi layar geser yang dipengaruhi oleh komponen scroll view.
   final ScrollPhysics? physics;
 
-  /// Tinggi dari gambar.
+  /// Opsi mematok ukuran tinggi tampilan dimensi untuk material aset grafis.
   final double? imageHeight;
 
-  /// Lebar dari gambar.
+  /// Opsi mematok pembatasan lebar horizontal dari pada aset visual.
   final double? imageWidth;
 
-  /// Jarak spasial vertikal antar elemen.
+  /// Margin bukaan jeda vertikal yang konsisten guna meregangkan posisi antara ilustrasi dan teks tulisan sekeliling.
   final double verticalSpacing;
 
-  /// Jarak spasial horizontal untuk sisi kiri dan kanan.
+  /// Margin jarak yang diterapkan dari arah sebelah kiri ke dan sisi pojok penahan (layout constraint) di kanannya.
   final double horizontalSpacing;
 
-  /// Gaya teks khusus untuk judul kosong.
+  /// Opsional penataan properti warna maupun dimensi huruf teks tajuk kosong (headline stylings).
   final TextStyle? titleStyle;
 
-  /// Gaya teks khusus untuk subjudul kosong.
+  /// Tatanan dekoratif terpisah demi merekayasa penampilan rupa subjudul kosong (caption text format).
   final TextStyle? subtitleStyle;
 
-  /// Teks kustom untuk tombol coba lagi.
+  /// Konten baris frasa string unik pengganti tulisan asali di sisi muka tombol pemicu ulang.
   final String? retryText;
 
-  /// Callback ketika tombol coba lagi ditekan.
+  /// Indikator sinyal pemicu kembali yang dijalankan seraya ditekan (dipanggil).
   final VoidCallback? onRetry;
 
-  /// Widget kustom untuk menggantikan tombol coba lagi bawaan.
+  /// Bentukan wadah rupa visual elemen kustom sebagai jalan memodifikasi tombol antarmuka muat ulang default standar kita.
   final Widget? retryWidget;
 
-  /// Menentukan apakah tombol coba lagi harus diaktifkan dan ditampilkan.
+  /// Bendera (flag boolean) yang memberlakukan perintah menyalakan lalu mempertontonkan tombol interaktif 'coba ulang' di layar ini.
   final bool emptyRetryEnabled;
 
+  /// Pembangunan struktur arsitektur grafikal (komposisi rendering UI) yang akan dilihat akhir oleh sang pengguna aplikasi.
   @override
   Widget build(BuildContext context) {
+    // Membawa semua komponen menyusup ke tengah dengan membungkus Center
     return Center(
+      // Merangkai isi supaya kompatibel untuk ditarik vertikal memakai perlakuan scroller bawaan layar sentuh.
       child: SingleChildScrollView(
+        // Pengaturan proporsi jarak margin (tata ruang) yang mengepung pinggiran komponen list view.
         padding: EdgeInsets.symmetric(
+          // Ruang spasi berirama yang membentang arah y
           vertical: verticalSpacing,
+          // Bukaan spasi yang membentang arah x
           horizontal: horizontalSpacing,
         ),
+        // Menerapkan model sentakan scroll (fisika scroll per area) ke wadah UI ini
         physics: physics,
+        // Menyederhanakan tumpukan obyek supaya rapi ditata garis memanjang dari arah sumbu bagian atas ke bagian dasar sumbu bawah.
         child: Column(
           children: [
-            // Gambar penanda kosong
+            // Blok penampang visual grafis dari indikasi gambar penanda rupa state list kosong
             emptyImageWidget ??
+                // Atau, andai komponen tak diekspresikan, gunakan widget standar ini via rujukan aset gambar.
                 Image.asset(
+                  // Jika properti null terapkan gambar lokal default 'AppImages.imgEmpty'
                   emptyImage ?? AppImages.imgEmpty,
+                  // Menyusun batasan tingginya
                   height: imageHeight,
+                  // Memaksakan patokan pelebaran grafiknya
                   width: imageWidth,
                 ),
+            // Penambahan spacer udara renggang vertikal berukuran sebesar spesifikasi di paramater.
             SizedBox(height: verticalSpacing),
-            // Judul
+            // Blok penampang keterangan pokok / kalimat kunci yang menarik atensi user langsung 
             Text(
+              // Tulisan utama yang ditarik, atau berlabuh pada lokal terjemahan 'txt_empty_list_title' andai data nil
               emptyTitle ?? 'txt_empty_list_title'.tr,
+              // Format pelurusan perenggan memusat
               textAlign: TextAlign.center,
+              // Terapkan arahan perwajahan jenis text sesuai suplai kustomisasi atau serap dari tema aplikasi besar
               style: titleStyle ?? Theme.of(context).textTheme.titleLarge,
             ),
+            // Ruang perenggang sedikit tipis pembelah antar text tajuk dengan teks uraian pelengkap 
             SizedBox(height: verticalSpacing / 6),
-            // Subjudul
+            // Subjudul penjelas detail yang disertai proteksi batas bukaan pad sempit di sisinya.
             Padding(
+              // Padding halus sekadar merenggangkan tepi sebanyak 8 dp kiri & kanan
               padding: const EdgeInsets.symmetric(horizontal: 8),
+              // Paragraf deskriptif pencerah arahan state yang sedang tak produktif 
               child: Text(
+                // Isikan variabel penjelas, sebaliknya berpulang memakai default frasa translasi.
                 emptySubtitle ?? 'txt_empty_list_subtitle'.tr,
+                // Pastikan blok perenggan selaras center
                 textAlign: TextAlign.center,
+                // Meneruskan kustom style ke material subjudul
                 style: subtitleStyle,
               ),
             ),
+            // Penyekat penahan akhir sebelum menumbuhkan susunan bottom actions.
             SizedBox(height: verticalSpacing),
-            // Tombol coba lagi jika diaktifkan
+            // Evaluasi logika percabangan kondisional: perlukah tombol pengisi aksi coba muat tampilkan ulang dicantumkan?
             if (emptyRetryEnabled && onRetry != null)
+              // Kalau ya, periksa kesiapan perwajahan widget utuh (custom widget button). Jika ada, tuangkan langsung,
               retryWidget ??
+                  // Bila terbukti opsinya absen, hasilkan desain bentuk SkyButton siap guna kita dengan ukuran standardnya.
                   SkyButton(
+                    // Pasangkan opsi menyesuaikan bentang badan tombol menyempit padat
                     wrapContent: true,
+                    // Tetapkan porsi tinggi elemen dasar
                     height: 50,
+                    // Imbuhkan batasan tepi celah mendatar guna meluaskan boks menangkup teks tulisan
                     padding: const EdgeInsets.symmetric(horizontal: 20),
+                    // Sajikan opsi kata terjemahan 'ulang aksi' untuk tampilan interaksi mukanya
                     text: retryText ?? 'txt_reload'.tr,
+                    // Ikat rujukan rute call action pada properti fungsi pembalasan ketikan ini.
                     onPressed: onRetry,
                   ),
           ],

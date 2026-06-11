@@ -11,9 +11,18 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
+/// Enum untuk mendefinisikan tipe tata letak pagination:
+/// [list] untuk daftar vertikal/horizontal biasa.
+/// [grid] untuk tata letak kisi (grid).
 enum PaginationType { list, grid }
 
+/// Widget pintar untuk merender daftar data berpaginasi (infinite scroll)
+/// beserta manajemen statusnya (memuat, kosong, ralat, data maksimal).
+///
+/// Menyediakan dukungan terpisah antara Android (RefreshIndicator)
+/// dan iOS (CupertinoSliverRefreshControl) secara bawaan.
 class PaginationStateView<T> extends StatelessWidget {
+  /// Konstruktor khusus untuk membuat pagination dalam bentuk [ListView].
   const PaginationStateView.list({
     required this.pagingController,
     required this.itemBuilder,
@@ -69,6 +78,7 @@ class PaginationStateView<T> extends StatelessWidget {
     this.anchor,
     this.center,
   })  : assert(
+          // Fitur tarik-untuk-menyegarkan (pull-to-refresh) tidak didukung pada sumbu horizontal
           (scrollDirection == Axis.horizontal && onRefresh == null) ||
               scrollDirection == Axis.vertical,
           'onRefresh is not supported for horizontal scrolling',
@@ -79,6 +89,7 @@ class PaginationStateView<T> extends StatelessWidget {
         showNewPageProgressIndicatorAsGridChild = null,
         showNoMoreItemsIndicatorAsGridChild = null;
 
+  /// Konstruktor khusus untuk membuat pagination dalam bentuk [GridView].
   const PaginationStateView.grid({
     required this.pagingController,
     required this.itemBuilder,
@@ -139,75 +150,128 @@ class PaginationStateView<T> extends StatelessWidget {
         anchor = null,
         center = null;
 
-  // Pagination properties
+  /// Tipe layout pagination (List atau Grid).
   final PaginationType type;
+  /// Mengatur arus data, memuat, dan status UI.
   final PagingController<int, T> pagingController;
+  /// Callback pembangun widget setiap item list.
   final ItemWidgetBuilder<T> itemBuilder;
 
-  // Widget properties
+  /// Membungkus daftar agar sesuai dengan ukuran isinya.
   final bool shrinkWrap;
+  /// Pengaturan sifat gulir (bouncing, clamping, dll).
   final ScrollPhysics? physics;
+  /// Widget pemisah antar item khusus tipe List.
   final Widget? separator;
+  /// Pengaturan jarak bagian luar list.
   final EdgeInsetsGeometry? padding;
+  /// Arah gulir (vertikal atau horizontal).
   final Axis scrollDirection;
+  /// Tetap menyimpan state item yang keluar dari viewport.
   final bool? addAutomaticKeepAlives;
+  /// Menghindari penggambaran ulang item tak perlu.
   final bool? addRepaintBoundaries;
+  /// Dukungan nomor aksesibilitas pembaca layar.
   final bool? addSemanticIndexes;
+  /// Batas rendering di luar layar (buffer).
   final double? cacheExtent;
+  /// Bagaimana anak elemen dipotong jika melebihi batas.
   final Clip? clipBehavior;
+  /// Menentukan cara menangani gestur menyeret dari awal.
   final DragStartBehavior? dragStartBehavior;
+  /// Lebar/tinggi spesifik untuk semua item (membantu performa).
   final double? itemExtent;
+  /// Cara papan tik ditutup saat pengguna menggulir.
   final ScrollViewKeyboardDismissBehavior? keyboardDismissBehavior;
+  /// Apakah ini pandangan utama di PrimaryScrollController.
   final bool? primary;
+  /// Menggulir dan menyusun list secara terbalik.
   final bool? reverse;
+  /// Kontrol gulir kustom dari luar widget.
   final ScrollController? scrollController;
+  /// Menyimpan status posisi scroll.
   final String? restorationId;
 
-  // Grid
+  /// Penentu kisi khusus tipe Grid.
   final SliverGridDelegate? gridDelegate;
+  /// Status error untuk grid berada di dalam grid child.
   final bool? showNewPageErrorIndicatorAsGridChild;
+  /// Indikator kemajuan loading pada grid berada di dalam grid child.
   final bool? showNewPageProgressIndicatorAsGridChild;
+  /// Indikator batas maksimum grid di dalam grid child.
   final bool? showNoMoreItemsIndicatorAsGridChild;
 
-  // Slivers list
+  /// Widget acuan khusus tipe SliverList.
   final Widget? prototypeItem;
+  /// Hitungan index khusus semantik.
   final int? Function(Widget, int)? semanticIndexCallback;
+  /// Gaya gulir (ScrollBehavior) kustom.
   final ScrollBehavior? scrollBehavior;
+  /// Jumlah maksimal child untuk semantic.
   final int? semanticChildCount;
+  /// Jangkar titik awal gulir.
   final double? anchor;
+  /// Titik pusat gulir.
   final Key? center;
 
-  // State properties
+  /// Mengaktifkan fitur coba lagi walau list dalam keadaan kosong.
   final bool emptyRetryEnabled;
+  /// Widget khusus status sedang memuat awal.
   final Widget? loadingView;
+  /// Widget khusus daftar kosong.
   final Widget? emptyView;
+  /// Widget khusus status batas maksimal.
   final Widget? maxItemView;
+  /// Widget khusus ketika error awal.
   final Widget? errorView;
+  /// Widget khusus ketika error memuat data ke-n.
   final Widget? errorLoadMoreView;
+  /// Mengecilkan loading awal.
   final bool shrinkWrapFirstPageIndicators;
+  /// Aksi fungsi tarik untuk menyegarkan daftar (pull-to-refresh).
   final VoidCallback? onRefresh;
+  /// Aksi panggilan ulang pengambilan data.
   final VoidCallback onRetry;
+  /// Widget kustom untuk gambar keadaan kosong.
   final Widget? emptyImageWidget;
+  /// Gambar teks path kosong.
   final String? emptyImage;
+  /// Judul pesan kesalahan.
   final String? errorTitle;
+  /// Subjudul pesan kesalahan.
   final String? errorSubtitle;
+  /// Judul data kosong.
   final String? emptyTitle;
+  /// Subjudul data kosong.
   final String? emptySubtitle;
+  /// Gaya teks judul data kosong.
   final TextStyle? emptyTitleStyle;
+  /// Gaya teks subjudul data kosong.
   final TextStyle? emptySubtitleStyle;
+  /// Path gambar ketika kesalahan.
   final String? errorImage;
+  /// Widget kustom gambar ketika kesalahan.
   final Widget? errorImageWidget;
+  /// Teks tombol ulang.
   final String? retryText;
+  /// Jarak spasi diantara teks dan ikon vertikal.
   final double? verticalSpacing;
+  /// Jarak spasi diantara teks horizontal.
   final double? horizontalSpacing;
+  /// Tinggi aset/ikon.
   final double? imageHeight;
+  /// Lebar aset/ikon.
   final double? imageWidth;
+  /// Gaya judul error.
   final TextStyle? errorTitleStyle;
+  /// Gaya subjudul error.
   final TextStyle? errorSubtitleStyle;
+  /// Widget tombol kustom mengulang.
   final Widget? retryWidget;
 
   @override
   Widget build(BuildContext context) {
+    // Memilih tipe gaya rendering berdasarkan platform OS.
     if (Platform.isIOS) {
       return _iosPaginationView();
     } else {
@@ -215,13 +279,16 @@ class PaginationStateView<T> extends StatelessWidget {
     }
   }
 
+  /// Membangun widget komponen berdasarkan [PaginationType] dan [isSliver].
   Widget _buildChildByType({bool isSliver = false}) {
+    // Jika komponen diminta bentuk Sliver (untuk CustomScrollView iOS misalnya)
     if (isSliver) {
       return switch (type) {
         PaginationType.list => _buildPagedSliverList(),
         PaginationType.grid => _buildPagedSliverGrid(),
       };
     } else {
+      // Bentuk biasa (Normal ListView / GridView)
       return switch (type) {
         PaginationType.list => _buildPagedList(),
         PaginationType.grid => _buildPagedGrid(),
@@ -229,18 +296,23 @@ class PaginationStateView<T> extends StatelessWidget {
     }
   }
 
+  /// Membangun view ala Android dengan [RefreshIndicator].
   Widget _androidPaginationView() {
     if (onRefresh != null) {
+      // Jika refresh tidak null, bungkus dengan RefreshIndicator bawaan material.
       return RefreshIndicator(
         onRefresh: () => Future.sync(onRefresh!),
         child: _buildChildByType(),
       );
     } else {
+      // Tanpa kemampuan pull-to-refresh.
       return _buildChildByType();
     }
   }
 
+  /// Membangun view ala iOS dengan [CupertinoSliverRefreshControl] dan [CustomScrollView].
   Widget _iosPaginationView() {
+    // Refresh control pada iOS harus disatukan dengan sliver.
     if (onRefresh != null && scrollDirection == Axis.vertical) {
       return Padding(
         key: key,
@@ -263,18 +335,22 @@ class PaginationStateView<T> extends StatelessWidget {
           anchor: anchor ?? 0.0,
           center: center,
           slivers: [
+            // Kontrol tarik-untuk-menyegarkan gaya Cupertino
             CupertinoSliverRefreshControl(
               onRefresh: () => Future.sync(onRefresh!),
             ),
+            // Isian data dalam wujud Sliver
             _buildChildByType(isSliver: true),
           ],
         ),
       );
     } else {
+      // Tanpa sliver refresh
       return _buildChildByType();
     }
   }
 
+  /// Pembangun normal list
   Widget _buildPagedList() {
     return PagingListener(
       controller: pagingController,
@@ -307,6 +383,7 @@ class PaginationStateView<T> extends StatelessWidget {
     );
   }
 
+  /// Pembangun sliver list
   Widget _buildPagedSliverList() {
     return PagingListener(
       controller: pagingController,
@@ -326,6 +403,7 @@ class PaginationStateView<T> extends StatelessWidget {
     );
   }
 
+  /// Pembangun normal grid
   Widget _buildPagedGrid() {
     return PagingListener(
       controller: pagingController,
@@ -361,6 +439,7 @@ class PaginationStateView<T> extends StatelessWidget {
     );
   }
 
+  /// Pembangun sliver grid
   Widget _buildPagedSliverGrid() {
     return PagingListener(
       controller: pagingController,
@@ -384,6 +463,7 @@ class PaginationStateView<T> extends StatelessWidget {
     );
   }
 
+  /// Mengembalikan delegate pembangunan tampilan status (loading, success, dll).
   PagedChildBuilderDelegate<T> _builderDelete({required bool isSliver}) {
     return PaginationDelegate<T>(
       pagingController: pagingController,

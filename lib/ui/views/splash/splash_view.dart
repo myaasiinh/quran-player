@@ -5,35 +5,45 @@ import 'package:quran_player/ui/views/splash/splash_controller.dart';
 import 'package:quran_player/ui/views/splash/widgets/mandala_painter_widget.dart';
 import 'package:quran_player/ui/widgets/colored_status_bar.dart';
 
-/// [SplashView] adalah representasi visual dari startup aplikasi.
-/// Principal Note: View ini menggunakan SplashController untuk akses
-/// state lifecycle yang dikelola oleh GetX.
+/// [SplashView] adalah representasi antarmuka visual (UI) paling pertama yang muncul saat startup aplikasi.
+/// Principal Note: View ini terikat pada SplashController untuk mengkoordinasikan
+/// state dan lifecycle perpindahan rute (routing) yang dikelola oleh GetX.
 class SplashView extends GetView<SplashController> {
-  /// Konstruktor konstan untuk optimasi performa widget.
+  /// Konstruktor bersifat konstan (const) untuk memberikan optimasi performa kompilasi pada widget.
   const SplashView({super.key});
 
-  /// Rute navigasi unik untuk halaman Splash.
+  /// Deklarasi nama rute navigasi unik (route path) untuk menjangkau halaman Splash ini.
   static const String route = '/splash';
 
+  /// Fungsi override pembentuk struktur widget visual Splash.
   @override
   Widget build(BuildContext context) {
-    /// Explicit find untuk menjamin controller teregistrasi saat view dibangun.
+    /// Mencari secara eksplisit (explicit find) instance untuk menjamin bahwa 
+    /// controller sudah teregistrasi dengan benar sesaat sebelum view dirender.
     Get.find<SplashController>();
 
+    // Membungkus layar dengan ColoredStatusBar agar warna bar status OS selaras dengan UI.
     return ColoredStatusBar(
+      // Menggunakan Scaffold sebagai tulang punggung pondasi komponen Material
       child: Scaffold(
+        // Konten diletakkan ke dalam satu Container dasar
         body: Container(
-          /// Mengatur lebar container memenuhi layar.
+          /// Mengatur lebar container secara absolut untuk selalu memenuhi lebar layar.
           width: double.infinity,
 
-          /// Mengatur tinggi container memenuhi layar.
+          /// Mengatur tinggi container secara absolut untuk selalu memenuhi dimensi layar.
           height: double.infinity,
 
-          /// Menggunakan background gradient premium untuk kesan spiritual dan modern.
+          /// Menggunakan gradien latar belakang linear yang premium 
+          /// demi menghadirkan kesan spiritual, elegan, sekaligus modern.
           decoration: const BoxDecoration(
+            // Menerapkan objek LinearGradient
             gradient: LinearGradient(
+              // Titik mula pancaran gradien dari sudut kiri atas
               begin: Alignment.topLeft,
+              // Titik akhir gradien memusat di kanan bawah
               end: Alignment.bottomRight,
+              // Deret paduan warna dari biru pekat ke warna biru aksen tema utama
               colors: [
                 Color(0xFF1E3C72),
                 Color(0xFF2A5298),
@@ -41,13 +51,15 @@ class SplashView extends GetView<SplashController> {
               ],
             ),
           ),
+          // Memakai mekanisme Stack agar widget dapat bertumpuk (layering)
           child: const Stack(
+            // Memastikan penumpukan selalu diposisikan sentral (tengah) di sumbu X dan Y
             alignment: Alignment.center,
             children: [
-              /// Latar belakang animasi kustom Mandala Painter (OP UI).
+              /// Layer bawah: Latar belakang animasi kustom berupa seni Mandala Painter (OP UI).
               MandalaPainterWidget(),
 
-              /// Konten teks dan ikon yang diletakkan tepat di tengah mandala.
+              /// Layer atas: Konten inti berupa teks dan ikon yang akan diletakkan tepat di pusat mandala.
               SplashContent(),
             ],
           ),
@@ -57,40 +69,59 @@ class SplashView extends GetView<SplashController> {
   }
 }
 
-/// Konten utama pada Splash screen dipisahkan untuk menjaga keterbacaan kode (SoC).
+/// Bagian konten utama pada Splash screen sengaja dipisahkan menjadi widget tersendiri 
+/// untuk menjaga kebersihan dan keterbacaan kode berprinsip SoC (Separation of Concerns).
 class SplashContent extends StatelessWidget {
-  /// Konstruktor konstan untuk SplashContent.
+  /// Konstruktor statis konstan untuk entitas SplashContent.
   const SplashContent({super.key});
 
+  /// Proses membina hierarki widget konten Splash.
   @override
   Widget build(BuildContext context) {
+    // Menyusun elemen anak secara vertikal
     return Column(
-      /// Mengatur alignment vertikal di tengah.
+      /// Mengatur penyelarasan tata letak elemen-elemen agar tertumpu simetris di tengah vertikal.
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        /// Ikon modern yang merepresentasikan Al-Quran, diposisikan di pusat mandala.
+        /// Ikon bergaya modern yang merepresentasikan Kitab Suci Al-Quran, 
+        /// diposisikan pada pusaran utama desain grafis mandala.
         const Icon(
+          // Pemilihan ikon buku/baca dari bawaan material
           Icons.auto_stories,
+          // Memberi skala dimensi lumayan besar agar menonjol
           size: 80,
+          // Mewarnai cerah putih kontras atas dasar gradien biru
           color: Colors.white,
         ),
 
-        /// Memberikan jarak antara ikon dan teks.
+        /// Mengalokasikan sebuah ruang kosong (SizedBox) berjarak 16 piksel 
+        /// guna memisahkan lambang ikon dengan tulisan.
         const SizedBox(height: 16),
 
-        /// Nama aplikasi terlokalisasi dengan gaya font premium.
+        /// Menyisipkan nama aplikasi terjemahan (terlokalisasi) yang didukung gaya font solid & premium.
         Text(
+          // Memanggil alias translasi bahasa berbasis lokasi perangkat
           'txt_quran_title'.tr,
+          // Menyetel pusat rata paragraf menjadi tengah (center)
           textAlign: TextAlign.center,
+          // Penyesuaian karakteristik rupa tipe teks
           style: const TextStyle(
+            // Warna dasar huruf yang mencolok
             color: Colors.white,
+            // Ukuran huruf dibesarkan ke poin 28
             fontSize: 28,
+            // Penegasan ketebalan tipografi (Bold)
             fontWeight: FontWeight.bold,
+            // Rentang ruang antara karakter sedikit dilebarkan (1.5)
             letterSpacing: 1.5,
+            // Pemberian ornamen efek bayangan kecil agar mudah terbaca atas tekstur dasar
             shadows: [
               Shadow(
+                // Kelembutan baur tepi dari bayangan
                 blurRadius: 10,
+                // Tingkat kepekatan atau kelir bayangan
                 color: Colors.black26,
+                // Jauh lemparan sudut kemiringan bayangan (jatuh di area bawah)
                 offset: Offset(0, 2),
               ),
             ],

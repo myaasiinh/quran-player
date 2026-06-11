@@ -1,11 +1,15 @@
 import '/config/themes/default_typography.dart';
 import 'package:flutter/material.dart';
 
-/// Custom typography when the style is not provided or more than [DefaultTypography]
+/// Ekstensi tipe tata huruf kustom untuk aplikasi (Typography).
 ///
-/// Add here to more style..
+/// Digunakan apabila gaya tulisan kurang, berbeda, atau lebih kompleks dari 
+/// [DefaultTypography] bawaan yang disediakan oleh sistem.
+/// 
+/// Tambahkan lebih banyak style teks di sini jika dibutuhkan.
 @immutable
 class AppTypography extends ThemeExtension<AppTypography> {
+  /// Konstruktor data model tata huruf (typography).
   const AppTypography({
     required this.headline1,
     required this.headline2,
@@ -26,28 +30,50 @@ class AppTypography extends ThemeExtension<AppTypography> {
     required this.verySmall,
     required this.link,
   });
+  
+  /// Teks gaya headline 1 (Paling Besar)
   final TextStyle headline1;
+  /// Teks gaya headline 2
   final TextStyle headline2;
+  /// Teks gaya headline 3
   final TextStyle headline3;
+  /// Teks gaya headline 4
   final TextStyle headline4;
+  
+  /// Teks gaya judul 1
   final TextStyle title1;
+  /// Teks gaya judul 2
   final TextStyle title2;
+  /// Teks gaya judul 3
   final TextStyle title3;
+  /// Teks gaya judul 4
   final TextStyle title4;
 
+  /// Teks gaya subjudul 1
   final TextStyle subtitle1;
+  /// Teks gaya subjudul 2
   final TextStyle subtitle2;
+  /// Teks gaya subjudul 3
   final TextStyle subtitle3;
+  /// Teks gaya subjudul 4
   final TextStyle subtitle4;
 
+  /// Teks gaya isi tubuh paragraf 1
   final TextStyle body1;
+  /// Teks gaya isi tubuh paragraf 2
   final TextStyle body2;
+  /// Teks gaya isi tubuh paragraf 3
   final TextStyle body3;
+  
+  /// Teks gaya berukuran kecil
   final TextStyle small;
+  /// Teks gaya berukuran sangat kecil
   final TextStyle verySmall;
 
+  /// Teks gaya bertautan URL
   final TextStyle link;
 
+  /// Metode untuk menyalin konfigurasi dengan sedikit penggantian opsional.
   @override
   AppTypography copyWith({
     TextStyle? headline1,
@@ -69,6 +95,7 @@ class AppTypography extends ThemeExtension<AppTypography> {
     TextStyle? verySmall,
     TextStyle? link,
   }) {
+    // Mereturn duplikasi obyek AppTypography dengan modifikasi yang diminta
     return AppTypography(
       headline1: headline1 ?? this.headline1,
       headline2: headline2 ?? this.headline2,
@@ -91,9 +118,11 @@ class AppTypography extends ThemeExtension<AppTypography> {
     );
   }
 
+  /// Metode transisi nilai (animasi) antara dua gaya tipografi.
   @override
   AppTypography lerp(ThemeExtension<AppTypography>? other, double t) {
     if (other is! AppTypography) return this;
+    // Menghasilkan interpolasi linier (lerp) per atribut TextStyle di berbagai frame
     return AppTypography(
       headline1: TextStyle.lerp(headline1, other.headline1, t)!,
       headline2: TextStyle.lerp(headline2, other.headline2, t)!,

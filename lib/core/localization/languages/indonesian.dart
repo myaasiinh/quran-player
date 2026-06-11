@@ -1,5 +1,8 @@
+/// File ini menyimpan Map konstan [id] (kependekan dari bahasa Indonesia/Indonesian).
+/// Digunakan oleh package `GetX` untuk melokalisasi (menterjemahkan) antarmuka dan 
+/// label pada seluruh sistem aplikasi.
 const Map<String, String> id = {
-  // Permission
+  // Permission (Perizinan)
   'txt_permission_warning': 'Izin diperlukan',
   'txt_need_permission_storage': 'Izinkan aplikasi mengakses penyimpanan',
   'txt_need_permission_camera': 'Izinkan aplikasi mengakses kamera',
@@ -8,12 +11,12 @@ const Map<String, String> id = {
   'txt_open_setting': 'Buka Pengaturan',
   'txt_need_several_permission': 'Aplikasi membutuhkan beberapa izin',
 
-  // Main Nav
+  // Main Nav (Navigasi Utama Layar)
   'txt_users': 'Pengguna',
   'txt_utility': 'Utilitas',
   'txt_profile': 'Profil',
 
-  // Network
+  // Network (Status dan Error Jaringan)
   'txt_connection_timeout': 'Koneksi Timeout',
   'txt_internal_server_error': 'Mohon maaf, terjadi kesalahan pada Server.',
   'txt_request_entity_to_large': 'Ukuran terlalu besar',
@@ -28,7 +31,7 @@ const Map<String, String> id = {
   'txt_unable_to_process': 'Tidak dapat mengirimkan permintaan',
   'txt_something_went_wrong': 'Terjadi Kesalahan!',
 
-  // Date Time
+  // Date Time (Format Waktu & Tanggal)
   'txt_expired': 'Berakhir',
   'txt_expired_k': 'Kedaluwarsa',
   'txt_days': 'Hari',
@@ -46,7 +49,7 @@ const Map<String, String> id = {
   'txt_friday': 'Jumat',
   'txt_saturday': 'Sabtu',
 
-  // General
+  // General (Teks Universal)
   'txt_version': 'Versi Aplikasi',
   'txt_media_unsupported': 'Media tidak didukung',
   'txt_setting': 'Pengaturan',
@@ -98,7 +101,7 @@ const Map<String, String> id = {
   'txt_no_following': 'User belum mem-follow siapapun',
   'txt_no_repository': 'Kamu belum memiliki repositori',
 
-  /// Validation
+  /// Validation (Peringatan & Validasi Formulir)
   'txt_failed': 'Failed',
   'txt_success': 'Success',
   'txt_warning': 'Warning',
@@ -113,7 +116,7 @@ const Map<String, String> id = {
   'txt_valid_email': 'Format email masih salah',
   'txt_valid_phone': 'Format nomor telepon masih salah.',
 
-  // Quran Player
+  // Quran Player (Terjemahan Spesifik Fitur Al-Quran)
   'txt_quran_title': 'Al-Quran',
   'txt_search_surah_hint': 'Cari Surah...',
   'txt_surah_detail_title': 'Detail Surah',
@@ -121,7 +124,7 @@ const Map<String, String> id = {
   'txt_medinan': 'Madaniyah',
   'txt_ayahs': 'Ayat',
 
-  // About Me
+  // About Me (Tentang Aplikasi/Developer)
   'txt_about_me': 'Tentang Saya',
   'txt_about_description':
       'Aplikasi Al-Quran Audio Player ini dikembangkan sebagai bagian dari technical test. Aplikasi ini menggunakan Clean MVVM Architecture dengan GetX sebagai state management. Fokus utama adalah pada performa tinggi, animasi kustom, dan kualitas kode standar industri.',
